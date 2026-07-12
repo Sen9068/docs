@@ -1,0 +1,56 @@
+---
+title: "Rtp"
+---
+
+```r
+/Rtp
+  |- config.yml
+  |- messages.yml
+  |- gui.yml
+```
+
+## Configuration
+
+```yaml
+worlds:
+  whitelist: # Worlds allowed to teleport to
+    - world
+    - world_nether
+    - world_the_end
+
+cooldown:
+  time-seconds: 300 # Cooldown for another /rtp teleport
+
+teleport:
+  min-radius: 100 # Min radius teleport in world
+  max-radius: 5000 # Max radius teleport in world
+  max-attempts: 150 # Maximum attempts for finding a safe rtp spot
+
+  nether-min-y: 32 # Minimum nether height rtp
+  nether-max-y: 110 # Max. nether height rtp
+  
+  allow-water: false # Allow water as safe rtp spot
+  play-sound: true 
+  success-actionbar: '&#00FF07Successfully teleported'
+  countdown:
+    seconds: 5
+    cancel-on-move: true
+    play-sound: true
+    sound: "BLOCK_NOTE_BLOCK_HAT"
+    pitch: 1.0
+    volume: 1.0
+```
+
+## Commands
+
+1. **/rtp** › Opens the RTP GUI or triggers RTP for a player
+2. **/rtp reload** › Reloads the RTP configuration
+
+## Permissions
+
+| Permission | Description | Default |
+| --- | --- | --- |
+| `smp.rtp` | Uses `/rtp` | true |
+| `smp.rtp.reload` | Reloads the RTP configuration<br />with `/rtp reload` | op |
+| `smp.rtp.bypass.cooldown` | Bypasses RTP cooldown checks | false |
+| `smp.rtp.bypass.countdown` | Bypasses the RTP countdown when set | false |

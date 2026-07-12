@@ -1,0 +1,66 @@
+---
+title: "Homes"
+---
+
+```r
+/Homes
+  |- GUI/
+  	|- confirmgui.yml
+	|- gui.yml
+  |- config.yml
+  |- messages.yml
+  |- homes.db
+```
+
+## Configuration
+
+```yaml
+default-max-homes: 3 # max homes for players (default)
+
+teleport-delay: 5 # teleport countdown
+
+worlds: # worlds where you want to enable/disable home usage (creating a home)
+  blacklist-enabled: false
+  blacklisted: []
+  whitelisted: []
+
+home-name:
+  max-length: 16 # max length for a home name
+  allow-numbers: true # if you want to allow numbers in the home name
+
+gui:
+  home-slots: 5 # how many slots in the home GUI
+  bed-start-slot: 11
+  candle-start-slot: 20
+  fill-empty-slots: false # filler GUI
+
+action-bar:
+  teleporting: '&fTeleporting in &#BC6EFF{seconds}s'
+  cancelled: '&#FF1B1BTeleport cancelled because you moved'
+
+sounds:
+  set-home: BLOCK_NOTE_BLOCK_PLING
+  teleport: ENTITY_ENDERMAN_TELEPORT
+  teleport-countdown: ENTITY_ARROW_SHOOT
+  delete: BLOCK_ANVIL_LAND
+```
+
+## Commands
+
+1. **/home (name)** › Teleports to your home
+2. **/sethome (name)** › Sets a new home at your location
+3. **/delhome (name)** › Deletes a home by name
+4. **/homes** › Opens home GUI
+5. **/homes reload** › Reloads Home configuration
+
+## Permissions
+
+| Permission | Description | Default |
+| --- | --- | --- |
+| `smp.homes` | Allows using /home and /homes commands | true |
+| `smp.homes.set` | Allows setting homes with /sethome | true |
+| `smp.homes.delete` | Allows deleting homes with /delhome | true |
+| `smp.homes.reload` | Allows reloading the Homes configuration | op |
+| `smp.homes.limit.X` | Allows setting up to X homes (where X is a number) | false |
+| `smp.homes.slot.X` | Unlocks additional GUI slots <br />(where X is 5, 9, 18, 27, 36, 45, 54) | false |
+| `smp.homes.*` | Bypasess all commands and lets you have infinite<br />number of homes | op |

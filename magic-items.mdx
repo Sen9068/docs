@@ -1,0 +1,74 @@
+---
+title: "Magic Items"
+---
+
+```r
+/MagicItems
+  |- config.yml
+  |- messages.yml
+  |- items.yml
+```
+
+## Configuration
+
+```yaml
+settings:
+  update-countdown-interval-ticks: 2400 
+# refreshes the self-destruct countdown display every 2 minutes server ticks
+
+  particle-color: # particle color when  breaking blocks
+    red: 164
+    green: 74
+    blue: 253
+    size: 1.0
+
+sounds:
+  item-received:
+    name: ENTITY_ITEM_PICKUP
+    volume: 1.0
+    pitch: 1.2
+  item-expired:
+    name: ENTITY_ITEM_BREAK
+    volume: 1.0
+    pitch: 0.8
+```
+
+## Items
+
+```yaml
+items:
+  trench-pickaxe:
+    enabled: true
+    display-name: '&#00C7EE&lTrench Pickaxe'
+    material: DIAMOND_PICKAXE
+    type: 3x3_pickaxe
+    radius: 1
+    self-destruct-time: 0
+    worlds: [] # worlds where It's enabled
+    disabled-worlds: [] # worlds where It's disabled
+    blacklisted-blocks: # Blocks which won't be able to be mined
+    - BEDROCK
+    - BARRIER
+    - END_PORTAL_FRAME
+    - REINFORCED_DEEPSLATE
+    allowed-blocks: [] # Leave this like this if you want all except blacklist blocks
+    enchants: # You can add more enchants
+    - EFFICIENCY:5
+    - UNBREAKING:3
+    - FORTUNE:3
+    lore:
+    - '&#777777Breaks blocks in a 3x3 area.'
+    - '&#777777Expires in: &#FFD700{duration}'
+```
+
+## Commands
+
+1. **/magicitem \<item\>** › Gives yourself a magic item.
+2. **/magicitem reload** › Reloads the mi configuration
+
+## Permissions
+
+| Permission | Description | Default |
+| --- | --- | --- |
+| `smp.magicitem.use` | Allows using MagicItems commands | op |
+| `smp.magicitem.admin` | Allows reloading MagicItems configuration | op |

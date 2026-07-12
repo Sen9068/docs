@@ -1,0 +1,247 @@
+---
+title: "Check Configuration"
+---
+
+Anticheat Check Configuration Guide
+
+## How Detection Escalation Works
+
+| Setting | Meaning | Tuning effect |
+| --- | --- | --- |
+| `enabled` | Enables or disables this individual check. Disabled checks do not collect or <br />add violations. | Use `false` only when a check conflicts with a server mechanic that cannot be exempted or tuned. |
+| `buffer` | Number of suspicious samples required before the check starts producing<br />alerts and VL. The buffer rises by one on a suspicious sample and normally <br />falls by one on a legitimate sample. | Higher values reduce false positives but allow cheats to run longer before alerting. Lower values react faster but are less tolerant of lag and unusual mechanics. |
+| `violation` | Violation level added every time a suspicious sample<br />reaches the required buffer. | Higher values reach punishment faster. Keep weak or heuristic checks lower than checks based on impossible packet values. |
+| `kick-vl` | Per-check VL at which commands under `actions.commands.kick` are executed. | `0` disables automatic punishment for that check and makes it alert-only. A positive value enables punishment at that VL. |
+
+VL is tracked separately for each player and check. Reaching a buffer does not immediately mean the player is kicked: it allows that sample to add the configured `violation`, and the accumulated VL must then reach `kick-vl`.
+
+## Units Used by Checks
+
+| Unit | Meaning |
+| --- | --- |
+| Distance | Blocks measured between movement events or packets. Horizontal distance uses the X/Z plane; vertical distance uses Y. |
+| `*-millis` | Milliseconds. `1000` milliseconds equals one second. |
+| Ticks | Server/game ticks. At a healthy 20 TPS, 20 ticks are approximately one second. |
+| Packets/events per second | Count observed during `sample-millis`, normally 1000 milliseconds. If the sample window changes, limits should be reviewed with it. |
+| Angle/delta | Degrees of player yaw or pitch rotation. |
+| Squared velocity | Vector length squared. This avoids a square-root operation and must not be treated as a normal block distance. |
+
+## Global Settings Affecting Checks
+
+| Path | Default | Description |
+| --- | --- | --- |
+| `settings.vl-decay.enabled` | `true` | Enables automatic reduction of stored VL and active check buffers. |
+| `settings.vl-decay.amount` | `0.5` | VL removed from every active player/check on each decay cycle. VL never falls below zero. |
+| `settings.vl-decay.interval-seconds` | `20` | Time between VL decay cycles. Each cycle also lowers active buffers by one. |
+| `settings.join-grace-millis` | `5000` | Suppresses checks immediately after joining while chunks, position, and client state stabilize. |
+| `settings.teleport-grace-millis` | `2500` | Suppresses checks after teleports to avoid interpreting a position jump as cheating. |
+| `settings.velocity-grace-millis` | `2000` | Suppresses checks after server-applied velocity, such as knockback or launch mechanics. |
+| `settings.liquid-exit-grace-millis` | `2000` | Temporarily relaxes liquid-sensitive movement checks after entering or leaving liquid. |
+| `settings.flag-history-limit` | `30` | Maximum recent flag records retained per player for the Anticheat GUI/history. It does not change detection sensitivity. |
+| `exemptions.bypass-permission` | `smp.anticheat.bypass` | Players with this permission are excluded from Anticheat checks. Do not grant it to ordinary ranks. |
+| `exemptions.ignored-worlds` | `world_event` | Worlds where players are excluded from checks. Add custom-minigame worlds here only when normal tuning is insufficient. |
+| `actions.commands.kick` | Kick command list | Console commands executed when a check reaches its positive `kick-vl`. `{player}` and `{check}` are replaced at runtime. |
+
+## Speed Configuration
+
+| Setting | Default | Description |
+| --- | --- | --- |
+| `max-walk-horizontal` | `0.46` | Maximum horizontal blocks allowed in one movement event while walking. |
+| `max-sprint-horizontal` | `0.72` | Maximum horizontal blocks allowed in one movement event while sprinting. |
+| `max-ice-horizontal` | `1.05` | Alternative horizontal limit on ice, slime, or honey blocks. |
+| `max-elytra-horizontal` | `2.2` | Reserved Elytra horizontal limit. Normal movement checks already exempt actively gliding players. |
+| `leniency` | `0.12` | Extra blocks added to the selected horizontal limit for latency and movement variance. |
+
+The Speed check also scales its limit for Speed potion effects and custom Bukkit walk speed. Increasing a maximum or `leniency` makes the check more permissive.
+
+## Fly, Glide, Step, HighJump, and FastClimb Configuration
+
+| Check | Setting | Default | Description |
+| --- | --- | --- | --- |
+| Fly | `max-upward-distance` | `0.62` | Largest upward Y change allowed in one movement event after the player has remained airborne long enough. |
+| Fly | `air-ticks-before-flag` | `14` | Airborne movement samples required before upward flight is evaluated. |
+| Fly | `freeze-seconds` | `0` | Seconds to hold a player at the pre-flag location after a Fly alert. `0` disables freezing. |
+| Glide | `min-fall-speed` | `-0.05` | Slowest legitimate downward delta. A value closer to zero is slower falling; suspicious players remain above this value while airborne. |
+| Glide | `min-horizontal` | `0.04` | Minimum horizontal movement required before slow falling is considered Glide. This avoids flagging a stationary player at an edge. |
+| Glide | `air-ticks-before-flag` | `24` | Airborne samples required before Glide evaluation begins. |
+| Step | `max-upward-distance` | `0.62` | Largest one-event Y increase allowed when not climbing or movement-assisted. |
+| HighJump | `max-height` | `1.45` | Maximum total height gained above the last grounded Y position. Unlike Step, this measures the complete jump rise. |
+| FastClimb | `max-upward-distance` | `0.42` | Largest one-event upward Y movement allowed while on a climbable block. |
+
+## InventoryMove Configuration
+
+| Setting | Default | Description |
+| --- | --- | --- |
+| `max-horizontal` | `0.12` | Maximum horizontal movement allowed while a container interface is open. |
+| `max-vertical` | `0.08` | Maximum absolute vertical movement allowed while a container interface is open. |
+
+## Reach Configuration
+
+| Setting | Default | Description |
+| --- | --- | --- |
+| `survival-distance` | `4.1` | Maximum measured attack distance for Survival/Adventure players before leniency. |
+| `creative-distance` | `5.5` | Maximum measured attack distance for Creative players before leniency. |
+| `leniency` | `0.35` | General distance allowance added for latency and position desynchronization. |
+| `hitbox-leniency` | `0.2` | Additional allowance around the target hitbox when calculating the nearest valid hit point. |
+
+## Combat Timing and Target Configuration
+
+| Check | Setting | Default | Description |
+| --- | --- | --- | --- |
+| NoSwing | `max-swing-age-millis` | `650` | Maximum time an attack may occur after the latest arm swing. Older or missing swings increase suspicion. |
+| AttackSpeed | `max-attacks-per-second` | `18` | Maximum attacks accepted during the sample window. |
+| AttackSpeed | `sample-millis` | `1000` | Window used to count attacks. |
+| KillAura | `multi-target-millis` | `300` | Minimum expected delay before attacking a different target. Rapid switching inside this window is suspicious. |
+| AimAngle | `max-angle` | `85.0` | Maximum angle between the player's look direction and the direction to the target. |
+| AimAngle | `min-distance` | `1.2` | Attacks closer than this are ignored by AimAngle because angles become unstable at very short range. |
+| Criticals | `min-fall-distance` | `0.12` | Minimum tracked fall distance expected for a legitimate critical hit. |
+| Criticals | `max-descent-speed` | `-0.12` | Vertical descent boundary used to validate the falling state. More-negative values represent faster downward movement. |
+| AutoClicker | `max-cps` | `22` | Maximum arm swings/clicks accepted in the sampling window. |
+| AutoClicker | `sample-millis` | `1000` | Window used to calculate CPS. |
+
+## AimPattern Configuration
+
+| Setting | Default | Description |
+| --- | --- | --- |
+| `sample-size` | `40` | Maximum recent rotation samples retained for pattern analysis. |
+| `min-samples` | `12` | Minimum valid samples required before pattern analysis can flag. |
+| `max-sample-age-millis` | `2500` | Rotation samples older than this are discarded. |
+| `min-distance` | `1.2` | Ignores very close targets where normal corrections can look unusually sharp. |
+| `min-average-delta` | `0.18` | Minimum average rotation change required before low-variance analysis is meaningful. |
+| `max-duplicate-ratio` | `0.78` | Maximum accepted proportion of repeated/equal rotation deltas. A higher repeated ratio suggests automated input. |
+| `max-delta-variance` | `0.0025` | Maximum variance considered unnaturally consistent when the average movement is high enough. |
+| `min-snap-delta` | `24.0` | Rotation change large enough to be classified as an aim snap. |
+| `post-snap-small-delta` | `0.35` | Maximum small correction size examined immediately after a snap. |
+| `min-post-snap-small-deltas` | `3` | Number of tiny post-snap corrections required for the snap pattern to become suspicious. |
+
+`AimPattern` and `BehaviorAnomaly` default to `kick-vl: 0` because they are statistical supporting checks. They should normally remain alert-only unless validated against substantial real-player data.
+
+## Timer and Packet Rate Configuration
+
+| Check | Setting | Default | Description |
+| --- | --- | --- | --- |
+| Timer | `max-moves-per-second` | `55` | Maximum Bukkit movement events accepted during the sample window. |
+| Timer | `sample-millis` | `1000` | Movement-event counting window. |
+| PacketTimer | `max-flying-packets-per-second` | `65` | Maximum movement/flying packets accepted during the packet sample window. |
+| PacketTimer | `sample-millis` | `1000` | Packet-counting window. |
+| PacketUseEntity | `max-packets-per-second` | `24` | Maximum entity interaction/attack packets accepted during the sample window. |
+| PacketUseEntity | `sample-millis` | `1000` | Entity-packet counting window. |
+
+## PacketMoveSim Configuration
+
+| Setting | Default | Description |
+| --- | --- | --- |
+| `player-half-width` | `0.30` | Half of the player collision-box width used for nearby block/collision sampling. |
+| `player-height` | `1.80` | Standing collision-box height used by the simulation. |
+| `sneak-height` | `1.50` | Sneaking collision-box height used by the simulation. |
+| `max-ground-horizontal` | `0.74` | Base one-packet horizontal limit while grounded. |
+| `max-air-horizontal` | `0.62` | Base one-packet horizontal limit while airborne. |
+| `max-slippery-horizontal` | `1.15` | Base horizontal limit on slippery blocks. |
+| `max-liquid-horizontal` | `0.55` | Base horizontal limit in liquid. |
+| `max-climb-horizontal` | `0.45` | Base horizontal limit while climbing. |
+| `max-elytra-horizontal` | `2.25` | Base horizontal limit while gliding with an Elytra. |
+| `max-ground-upward` | `0.62` | Base upward limit when movement starts from a grounded state. |
+| `max-air-upward` | `0.42` | Base upward limit while already airborne. |
+| `max-slime-upward` | `1.25` | Upward limit for slime-block bounce movement. |
+| `levitation-upward-per-level` | `0.12` | Upward allowance added for each Levitation amplifier level. |
+| `elytra-upward-leniency` | `0.16` | Additional upward allowance while Elytra gliding. |
+| `collision-horizontal-leniency` | `0.18` | Horizontal allowance near colliding blocks and edges. |
+| `honey-horizontal-leniency` | `0.12` | Extra horizontal allowance for honey-block behavior. |
+| `head-bump-leniency` | `0.18` | Vertical allowance when the player hits a block above their head. |
+| `max-airborne-y-gain` | `0.16` | Maximum unexpected increase between consecutive airborne vertical deltas. This detects resetting downward momentum. |
+| `hover-vertical` | `0.025` | Maximum absolute vertical movement treated as hovering. |
+| `hover-min-horizontal` | `0.03` | Minimum horizontal movement required during hover detection. |
+| `hover-packets` | `8` | Consecutive hover-like packets required before the hover condition flags. |
+| `horizontal-leniency` | `0.12` | General allowance added to horizontal packet limits. |
+| `vertical-leniency` | `0.08` | General allowance added to upward packet limits. |
+| `velocity-skip-squared` | `0.20` | Server velocity magnitude squared above which simulation is skipped to avoid knockback/launcher false positives. |
+| `teleport-reset-distance` | `8.0` | Packet-to-packet distance considered a teleport; movement history is reset instead of checked. |
+| `max-tick-scale` | `4.0` | Maximum multiplier applied when packet timing indicates several ticks elapsed between positions. |
+
+## Packet Validation Configuration
+
+| Check | Setting | Default | Description |
+| --- | --- | --- | --- |
+| PacketGround | `min-packets` | `5` | Consecutive unsupported packets claiming on-ground before PacketGround submits suspicious samples. |
+| PacketNoSwing | `max-swing-age-millis` | `500` | Maximum age of an arm-animation packet when an attack packet arrives. |
+| PacketRotation | `max-absolute-pitch` | `90.0` | Largest valid absolute pitch. Minecraft normally restricts pitch to -90 through 90. |
+| PacketRotation | `max-yaw-delta` | `165.0` | Largest accepted yaw change between consecutive rotation packets. |
+| PacketRotation | `max-pitch-delta` | `90.0` | Largest accepted pitch change between consecutive rotation packets. |
+
+InvalidPitch has no threshold option because its valid range is fixed by the Minecraft protocol. Its `buffer`, `violation`, and `kick-vl` still control escalation.
+
+## WaterWalk, NoFall, and GroundSpoof Configuration
+
+| Check | Setting | Default | Description |
+| --- | --- | --- | --- |
+| WaterWalk | `min-surface-ticks` | `8` | Consecutive suspicious liquid-surface movement samples required before entering the normal check buffer. |
+| NoFall | `min-fall-distance` | `5.0` | Minimum accumulated downward travel required before a landing is checked for expected damage. |
+| NoFall | `damage-grace-millis` | `1000` | Time after legitimate fall damage during which the landing is considered valid. |
+| GroundSpoof | `air-ticks-before-flag` | `8` | Minimum airborne samples before an unsupported ground claim can be suspicious. |
+| GroundSpoof | `max-vertical` | `0.02` | Maximum absolute Y movement while evaluating a false stationary ground claim. |
+
+## Block Placement Configuration
+
+| Check | Setting | Default | Description |
+| --- | --- | --- | --- |
+| FastPlace | `max-places-per-second` | `12` | Maximum block placements accepted during the sampling window. |
+| FastPlace | `sample-millis` | `1000` | Window used to count placements. |
+| BlockReach | `max-distance` | `6.5` | Maximum distance from the player's eye position to the placed block. |
+| Scaffold | `max-place-angle` | `80.0` | Placement/look angle boundary used by the strong underfoot Scaffold condition. |
+| Scaffold | `min-horizontal-movement` | `0.08` | Minimum recent horizontal movement required before Scaffold analysis. |
+| Scaffold | `max-horizontal-distance` | `1.8` | Maximum horizontal distance from the player to an underfoot placed block for the strong Scaffold pattern. |
+| Scaffold | `max-place-interval-millis` | `500` | Largest gap between placements that still belongs to the same rapid Scaffold streak. |
+| Scaffold | `min-consecutive-placements` | `3` | Consecutive suspicious underfoot placements required before Scaffold enters its normal buffer. |
+| ScaffoldSuspicion | `min-place-angle` | `80.0` | Minimum suspicious placement angle for the weaker supporting heuristic. |
+| ScaffoldSuspicion | `min-distance` | `3.8` | Minimum eye-to-block distance used by the weaker scaffold heuristic. |
+| Tower | `max-places` | `6` | Maximum placements in the tower sampling window before vertical tower behavior is suspicious. |
+| Tower | `max-vertical-delta` | `0.12` | Maximum vertical movement tolerance used when identifying repeated tower placement behavior. |
+| Tower | `sample-millis` | `1200` | Window used to count tower placements. |
+
+AirPlace uses block-neighbor support validation and therefore has no distance/timing threshold. Its sensitivity is controlled with `buffer`, `violation`, and `kick-vl`.
+
+## FastBreak and FastConsume Configuration
+
+| Check | Setting | Default | Description |
+| --- | --- | --- | --- |
+| FastBreak | `min-millis-between-breaks` | `45` | Minimum accepted time between completed block-break events. Shorter intervals are suspicious. |
+| FastConsume | `min-consume-millis` | `900` | Minimum accepted time from beginning item use to completing consumption. Shorter use is suspicious. |
+
+## Behavior Profiler Configuration
+
+| Setting | Default | Description |
+| --- | --- | --- |
+| `behavior-profiler.enabled` | `true` | Enables collection and scoring of combined behavior samples. |
+| `folder` | `Behaviour` | Data folder used by the profiler. |
+| `sample-seconds` | `5` | Interval between behavior snapshots. |
+| `default-label` | `unknown` | Initial staff/training label for players without an assigned classification. |
+| `alert-score` | `3.0` | Combined weighted score required to create a BehaviorAnomaly alert. |
+| `alert-cooldown-seconds` | `30` | Minimum time between behavior alerts for the same player. |
+| `csv.enabled` | `true` | Enables writing profiler samples to CSV for later review or model development. |
+| `csv.file` | `behavior-data.csv` | CSV filename inside the behavior folder. |
+
+## Behavior Profiler Weights
+
+| Signal | Threshold meaning |
+| --- | --- |
+| `max-horizontal` | Highest horizontal movement observed in a sample. |
+| `avg-horizontal` | Average horizontal movement during the sample. |
+| `air-ticks` | Sustained airborne duration. |
+| `cps` | Clicks/arm swings per second. |
+| `aps` | Attacks per second. |
+| `reach` | Largest observed combat reach. |
+| `scaffold-angle` | Suspicious block-placement angle. |
+| `yaw-snap` | Largest rapid yaw correction. |
+| `low-variance` | Highly consistent rotation; `min-average` prevents tiny/no movement from counting, and `threshold` is the maximum variance considered suspicious. |
+| `total-vl` | Combined current violation level from normal checks. |
+
+Each profiler signal adds its configured `weight` when its threshold condition is met. The resulting weights are summed and compared with `behavior-profiler.alert-score`. Lower thresholds, larger weights, or a lower alert score make behavior alerts more sensitive.
+
+Safe Tuning Procedure:
+
+1. Keep statistical checks such as `aim-pattern`, `scaffold-suspicion`, and `behavior-anomaly` at `kick-vl: 0` while collecting production data.
+2. Change one threshold at a time and record the old value.
+3. Test normal gameplay under high ping, low TPS, potion effects, knockback, liquids, ice, slime, honey, Elytra, vehicles, teleports, and custom server mechanics.
+4. Raise `buffer` first when a check is correct but occasionally noisy. Raise the physical threshold only when legitimate movement consistently exceeds it.
+5. Do not solve false positives by increasing `violation`Increasing it makes punishment faster. Reduce `violation`, increase `buffer`, increase the relevant maximum/leniency, or increase `kick-vl` instead.
+6. Review the detailed flag hover information and Behavior CSV before enabling automatic punishment for a better check.

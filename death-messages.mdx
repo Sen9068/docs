@@ -1,0 +1,68 @@
+---
+title: "Death Messages"
+---
+
+```r
+/DeathMessages
+  |- config.yml
+```
+
+## Configuration
+
+```yaml
+messages:
+  DEFAULT: # Default kill message
+  - '#FF2323☠ #FF3333{player} #FF5A5Awas killed'
+  - '#FF2323☠ #FF3333{player} #FF5A5Adied'
+```
+
+## Death Types
+
+List of all Death Types:
+
+| Death Type | Description |
+| --- | --- |
+| `DEFAULT` | Fallback death message |
+| `ENTITY_ATTACK` | Death by entity melee attack |
+| `PLAYER_ATTACK` | Death by player attack |
+| `ENTITY_SWEEP_ATTACK` | Death by sweep attack |
+| `CONTACT` | Death by contact damage |
+| `SUFFOCATION` | Death by suffocation |
+| `FALL` | Death by fall damage |
+| `FALLING_BLOCK` | Death by falling block |
+| `LAVA` | Death by lava |
+| `FIRE` | Death by fire |
+| `FIRE_TICK` | Death by burning over time |
+| `DROWNING` | Death by drowning |
+| `BLOCK_EXPLOSION` | Death by block explosion |
+| `ENTITY_EXPLOSION` | Death by entity explosion |
+| `STARVATION` | Death by starvation |
+| `VOID` | Death by void |
+| `LIGHTNING` | Death by lightning |
+| `SUICIDE` | Death by suicide damage cause |
+| `POISON` | Death by poison |
+| `MAGIC` | Death by magic |
+| `WITHER` | Death by wither effect |
+| `THORNS` | Death by thorns damage |
+| `DRAGON_BREATH` | Death by dragon breath |
+| `CUSTOM` | Death by custom damage |
+| `FLY_INTO_WALL` | Death by flying into a wall |
+| `HOT_FLOOR` | Death by hot floor damage |
+| `CRAMMING` | Death by entity cramming |
+| `DRYOUT` | Death by drying out |
+| `FREEZE` | Death by freezing |
+| `SONIC_BOOM` | Death by sonic boom |
+| `WORLD_BORDER` | Death by world border |
+| `KILL` | Death by kill command damage cause |
+| `MELTING` | Death by melting damage cause |
+| `PROJECTILE` | Death by projectile |
+
+## Commands
+
+1. **/deathmessage reload** › Reloads the deathmessage configuration
+
+## Permissions
+
+| Permission | Description | Default |
+| --- | --- | --- |
+| `smp.deathmessage.admin` | Access to /deathmessage reload | op |

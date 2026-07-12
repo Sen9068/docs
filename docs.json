@@ -11,77 +11,84 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
-        "groups": [
-          {
-            "group": "Getting started",
-            "pages": [
-              "index",
-              "quickstart",
-              "development"
-            ]
-          },
-          {
-            "group": "Customization",
-            "pages": [
-              "essentials/settings",
-              "essentials/navigation"
-            ]
-          },
-          {
-            "group": "Writing content",
-            "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
-            ]
-          },
-          {
-            "group": "AI tools",
-            "pages": [
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
-            ]
-          }
+        "tab": "Welcome",
+        "pages": [
+          "first-install",
+          "support",
+          "supporters"
         ]
       },
       {
-        "tab": "API reference",
-        "groups": [
+        "tab": "Modules",
+        "pages": [
+          "admincommands",
+          "afkzone",
+          "ah",
+          "ban-system",
+          "battlepass",
+          "billford",
+          "bossbar",
+          "bounty",
+          "chat",
+          "coins",
+          "crates",
+          "combat",
+          "death-messages",
+          "duels",
+          "economy",
+          "guide",
+          "homes",
+          "join-leave",
+          "kits",
+          "leaderboard",
+          "magic-items",
+          "motd",
+          "orders",
+          "player-commands",
+          "report",
+          "rtp",
+          "sell",
+          "settings",
+          "shop",
+          "spawn",
+          "spawners",
+          "tab",
+          "tags",
+          "teams",
+          "tebex-message",
+          "warps"
+        ]
+      },
+      {
+        "tab": "Other",
+        "pages": [
+          "permissions",
+          "placeholders"
+        ]
+      },
+      {
+        "tab": "Anticheat",
+        "pages": [
+          "ac",
           {
-            "group": "API documentation",
+            "group": "Checks",
             "pages": [
-              "api-reference/introduction"
+              "check-types",
+              "check-configuration"
             ]
           },
           {
-            "group": "Endpoint examples",
+            "group": "Behaviour",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "introduction",
+              "csv",
+              "labels",
+              "anomaly-score"
             ]
           }
         ]
       }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
-    }
+    ]
   },
   "logo": {
     "light": "/logo/light.svg",

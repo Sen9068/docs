@@ -1,0 +1,66 @@
+---
+title: "Tebex Message"
+---
+
+```r
+/TebexMessage
+  |- config.yml
+```
+
+## Configuration
+
+```yaml
+webhook:
+  url: '' # Paste your webhook url here if you want webhook vip messages
+  username: 'TebexMessage'
+  avatar-url: 'https://i.imgur.com/8n06M7v.png'
+  title: 'New purchase'
+  description: ".\n> **Player:** {player}\n> **Package:** {package}\n> **Price:** {price}€"
+  color: 51182
+  footer: 'yourserver.com'
+  gif-url: 'https://media.tenor.com/CscWz6p_O7wAAAAd/sigma-face-sar%C4%B1lmak.gif'
+countdown:
+  seconds: 3
+  title: '&#A264FF{seconds}'
+  subtitle: '&r'
+final-title:
+  title: '&#A264FF{player}'
+  subtitle: '&fPurchased {package}'
+  sound:
+    name: 'UI_TOAST_CHALLENGE_COMPLETE'
+    volume: 1.5
+    pitch: 1.0
+broadcast:
+  head-enabled: true # player head in vip message.
+  message:
+    - ''
+    - '     &#A264FF&l{player} PURCHASED VIP'
+    - ''
+    - ' &8› &fPlayer &#A264FF{player} &fpurchased &#A264FF{package}'
+    - '   &fThank you for the support &#A264FF❤'
+    - ''
+    - '&7       ꜱᴛᴏʀᴇ.ʏᴏᴜʀꜱᴇʀᴠᴇʀ.ᴇᴜ'
+    - ''
+```
+
+## Commands
+
+1. **/tebexmessage (player) (package) (price)** › Sends a Tebex purchase notification
+2. **/tebexmessage reload** › Reloads the TebexMessage configuration
+
+You can add to (package) whatever package name you want and whatever (price) you want too.
+
+#### Here is the example how to add it in Tebex:
+
+<img
+  src="/images/Screenshot-from-2026-07-11-17-27-41.png"
+  alt="Screenshot From 2026 07 11 17 27 41"
+  title="Screenshot From 2026 07 11 17 27 41"
+  className="mx-auto"
+/>
+
+## Permissions
+
+| Permission | Description | Default |
+| --- | --- | --- |
+| `smp.tebexmessage.admin` | `/tebexmessage` and `/tebexmessage reload` | op |

@@ -1,0 +1,73 @@
+---
+title: "Duels"
+---
+
+```r
+/Duels
+  |- GUIs/
+  	|- confirm.yml
+	|- main.yml
+  |- config.yml
+  |- messages.yml
+```
+
+## Configuration
+
+```yaml
+duel-world: world # World where the players will spawn
+spawn-distance: 15 # Distance between player
+request-expiration-seconds: 60
+broadcast-results: true # Broadcast who lost/won the duel
+max-duel-time: 600
+
+queue:
+  head-material: PLAYER_HEAD
+  head-title: '&f{player}'
+  head-lore:
+  - '&8› &fStatus: &#00FF1CAvailable'
+  - ''
+  - '&#BC6EFFClick to challenge'
+
+teleport-countdown:
+  seconds: 3
+  message: '&7Teleporting in &#BC6EFF{seconds}s &8- &#FF2323Do not move'
+  sound:
+    name: ENTITY_ARROW_SHOOT
+    volume: 1.0
+    pitch: 1.0
+
+countdown:
+  seconds: 5
+  title: '&#BC6EFF&lᴅᴜᴇʟ ꜱᴛᴀʀᴛɪɴɢ'
+  subtitle: '&#CDABFF&l{seconds}'
+  sound:
+    name: BLOCK_NOTE_BLOCK_PLING
+    volume: 1.0
+    pitch: 1.0
+  start-sound:
+    name: ENTITY_ENDER_DRAGON_GROWL
+    volume: 1.0
+    pitch: 1
+duel-start:
+  title: '&#00FF1C&lꜰɪɢʜᴛ'
+  subtitle: ''
+
+timer-bar: # Bossbar
+  title: '&#BC6EFFDuel Time: &f{time}'
+  color: PURPLE
+```
+
+## Commands
+
+1. **/duel** › Opens Duel GUI
+2. **/duel** (player) › Sends a Duels request to specific player
+3. **/duel accept** › Accepts Duel request
+4. **/duel deny** › Denies Duel request
+5. **/duel reload** › Reloads Duels configuration
+
+## Permissions
+
+| Permission | Description | Default |
+| --- | --- | --- |
+| `smp.duels.use` | Access to Duels commands like /duel, /duel (player etc.. | true |
+| `smp.duels.admin` | Allows using /duels reload | op |

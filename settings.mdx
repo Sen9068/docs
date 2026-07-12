@@ -1,0 +1,63 @@
+---
+title: "Settings"
+---
+
+```r
+/Settings
+  |- config.yml
+  |- messages.yml
+  |- settings.db
+```
+
+## Configuration
+
+```yaml
+placeholders: # Placeholder format for on/off setting
+  'true': '#0EFF00&lᴏɴ'
+  'false': '#FF2323&lᴏꜰꜰ'
+sounds:
+  toggle: UI_BUTTON_CLICK # click sound
+whitelisted_visibility_worlds: # Worlds where the invisible players command works
+- world
+- world_nether
+- world_the_end
+gui:
+  title: '&8Settings'
+  size: 54
+  fill-empty: false # fill empty slots in the /settings gui
+  filler-material: BLACK_STAINED_GLASS_PANE
+  items:
+    global_chat:
+      slot: 10
+      default: true
+      material-on: WRITABLE_BOOK
+      material-off: WRITABLE_BOOK
+      name: '&#BC6EFFGlobal Chat &8› %onoff%'
+      lore:
+      - '&8Toggle'
+      - ''
+      - '&fShow or hide global chat messages.'
+      - ''
+      - '&#BC6EFFClick to toggle'
+...
+```
+
+You can also remove a setting if you want by simply just removing it from the config.yml
+
+## Commands
+
+1. **/settings** › Opens your own settings GUI
+2. **/settings reload** › Reloads the Settings configuration
+3. **/settings (player)** › Opens another player's settings GUI
+
+## Permissions
+
+| Permission | Description | Default |
+| --- | --- | --- |
+| `smp.settings.use` | Opens your own settings with `/settings` | true |
+| `smp.settings.reload` | Reloads the Settings configuration | op |
+| `smp.settings.admin` | Opens another player's settings<br />with `/settings <player>` | op |
+| `smp.settings.server` | Allows changing server settings <br />from the Settings GUI | op |
+| `smp.settings.player_visibility` | Allows toggling the player visibility setting | true |
+| `smp.settings.glow` | Allows toggling the glow setting | true |
+| `smp.settings.visibility.bypass` | Bypasses other players hiding this player<br />with visibility settings | op |

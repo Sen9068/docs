@@ -1,0 +1,79 @@
+---
+title: "Placeholders List"
+---
+
+| Placeholder | Output |
+| --- | --- |
+| `%smp_balance_short%` | Economy balance using abbreviated formatting such as `1.5K`. |
+| `%smp_money_short%` | Alias of `%smp_balance_short%`. |
+| `%smp_tokens_formatted%` | Coin/token balance using the Coins module's configured formatting. |
+| `%smp_coins%` | Raw coin balance without unnecessary trailing zeroes. |
+| `%smp_coins_short%` | Abbreviated coin balance such as `1.5K`, `2M`, or `3B`. |
+| `%smp_coins_formatted%` | Coin balance with grouping and up to four decimal places. |
+| `%smp_tag%` | Player's active tag. Returns an empty string when no tag is selected. |
+| `%smp_bounty_indicator%` | Configured bounty indicator when the player has a bounty; otherwise empty. |
+| `%smp_team_name%` | Player's team display name, or `None` when not in a team. |
+| `%smp_player_ping%` | Current ping in milliseconds. |
+| `%smp_player_kills%` | Vanilla player-kill statistic. |
+| `%smp_player_deaths%` | Vanilla death statistic. |
+| `%smp_player_playtime%` | Compact playtime, such as `5h` or `42m`. |
+| `%smp_player_playtime_hours%` | Total completed playtime hours as an integer. |
+
+## Crates Placeholders
+
+| Placeholder | Output |
+| --- | --- |
+| `%smp_crates_keys%` | Total number of crate keys held by the player. |
+| `%smp_crates_total%` | Alias of `%smpcrates_keys%`. |
+| `%smp_crates_key_<key>%` | Amount of a specific key. Example: `%smpcrates_key_basic%`. |
+| `%smp_crates_opens_<crate>%` | Crate open count placeholder. Currently returns `0` because open statistics are not stored. |
+
+## JoinLeave Placeholders
+
+| Placeholder | Output |
+| --- | --- |
+| `%smp_joinleave_online%` | Current number of online players. Does not require a player context. |
+| `%smp_joinleave_max%` | Server maximum player count. Does not require a player context. |
+| `%smp_joinleave_name%` | Player's account name. |
+| `%smp_joinleave_displayname%` | Player's serialized display name, including configured formatting. |
+
+## Leaderboard Placeholders
+
+Leaderboard placeholders use this structure:
+
+```text
+%leaderboard_top_<stat>_<rank>%
+%leaderboard_top_<stat>_value_<rank>%
+%leaderboard_top_<stat>_name_<rank>%
+%leaderboard_top_<stat>_head_<rank>%
+```
+
+Supported `<stat>` values:
+
+- `money`
+- `coins`
+- `playtime`
+- `kills`
+- `deaths`
+
+`<rank>` starts at `1`
+
+Examples:
+
+| Placeholder | Output |
+| --- | --- |
+| `%leaderboard_top_money_1%` | Formatted money value of the first-ranked player. |
+| `%leaderboard_top_money_name_1%` | Name of the first-ranked money player. |
+| `%leaderboard_top_money_head_1%` | `<head:PlayerName>` token used by SMP holograms. |
+| `%leaderboard_top_coins_3%` | Formatted coin value at rank 3. |
+| `%leaderboard_top_playtime_5%` | Formatted playtime at rank 5. |
+| `%leaderboard_top_kills_name_1%` | Name of the player with the most kills. |
+| `%leaderboard_top_deaths_10%` | Formatted death count at rank 10. |
+
+When a rank has no entry, value placeholders return `0`, name placeholders return `None`, and head placeholders return an empty string.
+
+Duels Placeholders
+
+| Placeholder | Output |
+| --- | --- |
+| `%lb_duels_queued%` | Number of other online players available to the current player. Without a player context, it returns the full online count. |

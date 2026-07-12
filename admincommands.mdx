@@ -1,0 +1,78 @@
+---
+title: "Admin Commands"
+description: "Admincommands are the essential commands for admins on your minecraft server."
+---
+
+The Admincommands folder contains:
+
+```r
+ /AdminCommands
+  |- data/
+  	|- data.yml
+  |- config.yml
+  |- messages.yml
+```
+
+---
+
+## Configuration
+
+```yaml
+broadcast:
+  prefix: '&#BC6EFFBroadcast &8›' # Broadcast text before the message
+  format: '{prefix} &f{message}' # Broadcast message format
+  play-sound: true # If you want to play the broadcast sound
+  sound: ENTITY_PLAYER_LEVELUP
+```
+
+```yaml
+fly:
+  whitelisted-worlds: # Where to enable /fly command
+    - 'world'
+    - 'world_nether'
+    - 'world_the_end'
+```
+
+```yaml
+vanish:
+  bossbar:
+    title: '&#BC6EFF&lVANISH' # Bossbr message text
+    color: 'PURPLE'
+    style: 'SOLID'
+```
+
+## Commands
+
+1. **/vanish** › Toggles vanish
+2. **/freeze (player)** › Toggles freeze for a certain player
+3. **/sudo (player) (messages)** › Writes message/command for a player
+4. **/lightning** › Spawns lightning
+5. **/fly (player)** › Toggles fly for a player
+6. **/heal (player)|all** › Heals a certain player
+7. **/feed (player)|all** › Feeds a certain player
+8. **/speed (player)** › Sets speed from 1-(set amount in config) - default is 10
+9. **/nightvision** › Toggles nightvision
+10. **/invsee (player)** › Opens GUI menu with players inventory
+11. **/broadcast (message)** › Sends a broadcast message to every player
+
+## Permissions
+
+| Permission | Description | Default |
+| --- | --- | --- |
+| `smp.opcommands.vanish` | Vanish commands | false |
+| `smp.opcommands.vanish.see` | See vanished players | false |
+| `smp.opcommands.freeze` | Freeze command | false |
+| `smp.opcommands.sudo` | Sudo command | false |
+| `smp.opcommands.lightning` | Lightning command | false |
+| `smp.opcommands.fly` | Fly command | false |
+| `smp.opcommands.heal` | Heal command | false |
+| `smp.opcommands.feed` | Feed command | false |
+| `smp.opcommands.speed` | Speed command | false |
+| `smp.opcommands.nightvision` | Night vision command | false |
+| `smp.opcommands.invsee` | Invsee command | false |
+| `smp.opcommands.teleport` | Teleport commands | op |
+| `smp.opcommands.gamemode` | Gamemode commands | op |
+| `smp.opcommands.broadcast` | Broadcast command | false |
+| `smp.opcommands.give` | Give command | op |
+| `smp.opcommands.admin` | Admincommands command | false |
+| `smp.opcommands.*` | All admin commands (wildcard) | false |

@@ -1,0 +1,33 @@
+---
+title: "Introduction"
+---
+
+The Behaviour profiler creates It's data directory at:<br />`plugins/SMP/Anticheat/Behaviour/`
+
+The folder name is controlled by `behaviour-profiler` in `plugins/SMP/Anticheat/config.yml` Changing that value makes the profiler use a different directory. It does not automatically move data from the old dir.
+
+The folder is created only when `behaviour-profiler` `enabled: true`  and the profiler starts. It is generated at runtime and is not copied from the plugins default resources.
+
+## Files in the Behaviour Folder
+
+| File | Purpose | Safe to edit while running? |
+| --- | --- | --- |
+| `behavior.db` | Primary SQLite database containing behavior samples and persistent staff labels. | No. Stop the server before manually editing, replacing, or copying it for a consistent backup. |
+| `behavior.db-wal` | SQLite write-ahead log that can temporarily contain recent database writes. It may appear while the server is running. | No. Do not delete it while the database is open. |
+| `behavior.db-shm` | SQLite shared-memory coordination file used with WAL mode. It may appear while the server is running. | No. Do not delete it while the database is open. |
+| `behavior-data.csv` | Append-only human-readable export of collected behavior samples. The filename is configurable. | Reading is safe. Avoid editing while the server is appending data. |
+
+`behaviour.db` stores all the data and the `.csv` is an export for review or analasys. Deleting or editing the `.csv` does not change records in SQLite or reset lables.
+
+## When Samples are Created
+
+The profiler collects movement, rotation, click, attack, block placement, reach, ping, TPS and current Anticheat VL values in memory. Every `behaviour-profiler` `sample-seconds` it closes the current window for each eligible online player and creates one sample row.
+
+A player is excluded from behaviour sampling when any of these conditions apply:
+
+1. The player has the permission configured in `exemptions.bypass-permission` 
+2. The players world appears in `exemptions.ignored-worlds` 
+3. The player is in Creative mode
+4. The player is in Spectator mode
+
+Pending samples and lables are flushed asynchronously approximately once per second. This keeps SQL and `.csv` disk work away from the main server thread.

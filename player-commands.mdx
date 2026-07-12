@@ -1,0 +1,120 @@
+---
+title: "Player Commands"
+---
+
+```r
+/PlayerCommands
+  |- enderchests/
+	|- X.yml
+  |- config.yml
+  |- messages.yml
+  |- gui.yml
+```
+
+## Configuration
+
+```yaml
+features:
+  enderchest: true # Custom enderchest enabled t/f
+  tpa: true # tpa system
+  tpahere: true # tpahere
+  pay: true # pay command
+  msg: true # msg command
+
+enderchest:
+  default-rows: 3 # Default rows (27 slots)
+  title-own: '&8Ender Chest'
+  title-others: '&8Ender Chest: {player}'
+
+tpa:
+  expiration-seconds: 60
+  cooldown-seconds: 5
+  allow-cross-world: true
+  use-gui: true # confirmation gui
+  countdown:
+    seconds: 5
+    cancel-on-move: true
+    respect-bypass-permission: false
+    bypass-permission: smp.teleport.bypass.countdown
+    play-sound: true
+    sound: BLOCK_NOTE_BLOCK_HAT
+    volume: 1.0
+    pitch: 1.0
+    teleport-sound:
+      enabled: true
+      name: ENTITY_ENDERMAN_TELEPORT
+      volume: 1.0
+      pitch: 1.0
+
+pay:
+  min-amount: 1 # min amount to pay in /pay
+  max-amount: 0 # Allows paying as much as you want
+  tax-rate: 0.0 # 0% tax rate
+
+msg:
+  format-sender: '&#BC6EFFMessages &8› &fYou &8→ &#BC6EFF{receiver} &8› &f{message}'
+  format-receiver: '&#BC6EFFMessages &8› &#BC6EFF{sender} &8→ &fYou &8› &f{message}'
+  play-sound: true
+  sound: ENTITY_EXPERIENCE_ORB_PICKUP
+
+anvil: # price for using /anvil
+  price: 0
+
+smithing: # price for using /smithing
+  price: 0
+
+craft: # price for using /craft
+  price: 0
+
+hat: # prtic
+  price: 0
+
+repair:
+  price: 100
+
+leaderboards:
+  playtimetop-category: playtime
+  topkills-category: kills
+  topdeaths-category: deaths
+  enabled: true
+```
+
+## Commands
+
+1. **/ec** or **/enderchest** › Opens your Ender Chest
+2. **/ec (player)** › Opens another player's Ender Chest
+3. **/ec (player) reset** › Starts a reset flow for another player's Ender Chest
+4. **/tpa (player)** › Sends a teleport request
+5. **/tpahere (player)** › Sends a teleport-here request
+6. **/tpaaccept** › Accepts the latest teleport request
+7. **/tpadeny** › Denies the latest teleport request
+8. **/tpauto** › Toggles auto-accept for teleport requests
+9. **/pay (player) (amount)** › Sends money to another player
+10. **/msg (player) (message)** › Sends a private message
+11. **/anvil** › Opens an anvil GUI
+12. **/smithing** › Opens a smithing GUI
+13. **/craft** › Opens a crafting GUI
+14. **/hat** › Wears the item in your hand as a hat
+15. **/repair** › Repairs the item in your hand
+16. **/leaderboard** › Opens the main leaderboard GUI
+17. **/playtimetop** › Opens the playtime leaderboard
+18. **/topkills** › Opens the kills leaderboard
+19. **/topdeaths** › Opens the deaths leaderboard
+
+## Permissions
+
+| Permission | Description | Default |
+| --- | --- | --- |
+| `smp.command.ec` | Opens your Ender Chest with `/ec` | true |
+| `smp.playercommands.enderchest.others` | Opens or resets another<br /> player's Ender Chest | op |
+| `smp.playercommands.tpa` | Uses all TPA commands | true |
+| `smp.playercommands.tpahere` | Uses `/tpahere` | true |
+| `smp.playercommands.pay` | Uses `/pay` | true |
+| `smp.playercommands.msg` | Uses `/msg` | true |
+| `smp.command.anvil` | Uses `/anvil` | true |
+| `smp.command.smithing` | Uses `/smithing` | true |
+| `smp.command.craft` | Uses `/craft` | true |
+| `smp.command.hat` | Uses `/hat` | true |
+| `smp.command.repair` | Uses `/repair` | true |
+| `smp.playercommands.leaderboards` | Uses `/leaderboard`, `/playtimetop`, <br />`/topkills`, `/topdeaths` | true |
+| `smp.playercommands.enderchest.size.X` | Adds extra Ender Chest <br />rows for values 1-6 | false |

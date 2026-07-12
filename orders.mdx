@@ -1,0 +1,71 @@
+---
+title: "Orders"
+---
+
+```r
+/Orders
+  |- GUI/
+	|- gui.yml
+	|- ordercreate.yml
+	|- yourorders.yml
+  |- config.yml
+  |- messages.yml
+  |- orders.db
+```
+
+## Configuration
+
+```yaml
+limits:
+  max-orders-per-player: 10 # Default max orders which a player can have at once
+  min-price-per-item: 0.01 # Price per order item minimum
+  max-price-per-item: 1000000.0 # Maxiumum price per order item
+  min-amount: 1 # Minimum amount for 1 order
+  max-amount: 100000 # Maximum amount for 1 order
+
+fees:
+  creation-fee: 10.0 # Fee for creating an order (charges $10)
+
+sounds: # sounds
+  order-created:
+    sound: ENTITY_EXPERIENCE_ORB_PICKUP
+    volume: 1.0
+    pitch: 1.0
+  order-removed:
+    sound: BLOCK_NOTE_BLOCK_BASS
+    volume: 1.0
+    pitch: 0.5
+  order-delivered:
+    sound: ENTITY_PLAYER_LEVELUP
+    volume: 1.0
+    pitch: 1.0
+  order-received:
+    sound: ENTITY_EXPERIENCE_ORB_PICKUP
+    volume: 1.0
+    pitch: 1.5
+  delivery-claimed:
+    sound: ENTITY_ITEM_PICKUP
+    volume: 1.0
+    pitch: 1.0
+  gui-click:
+    sound: UI_BUTTON_CLICK
+    volume: 0.5
+    pitch: 1.0
+```
+
+## Commands
+
+1. **/orders** › Opens the main Orders GUI
+2. **/orders create** › Opens the order creation GUI
+3. **/orders reload** › Reloads the Orders configuration
+
+## Permissions
+
+| Permission | Description | Default |
+| --- | --- | --- |
+| `smp.orders.use` | Opens the Orders GUI with `/orders` | true |
+| `smp.orders.create` | Allows creating orders with `/orders create` | true |
+| `smp.orders.reload` | Allows reloading the Orders configuration | op |
+| `smp.orders.admin` | Allows removing other players' orders | op |
+| `smp.orders.bypass` | Bypasses order count and payment checks | false |
+| `smp.order.slot.X` | Adds `X` extra order slots to the player's limit | false |

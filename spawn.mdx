@@ -1,0 +1,43 @@
+---
+title: "Spawn"
+---
+
+```r
+/Spawn
+  |- config.yml
+  |- messages.yml
+  |- spawn.db
+```
+
+## Configuration
+
+```yaml
+teleport:
+  cooldown-seconds: 0 # Cooldown when the player can use /spawn again
+  countdown-seconds: 5 # /spawn countdown in actionbar
+  actionbar: '&fTeleporting in &#BC6EFF{seconds}s'
+  sound:
+    name: ENTITY_ARROW_SHOOT
+    volume: 3.0
+    pitch: 1.0
+  teleport-sound:
+    name: ENTITY_ENDERMAN_TELEPORT
+    volume: 3.0
+    pitch: 1.0
+```
+
+## Commands
+
+1. **/spawn** › Teleports you to spawn
+2. **/spawn reload** › Reloads the spawn configuration
+3. **/setspawn** › Sets the spawn location to your current position
+4. **/delspawn** › Deletes the saved spawn location
+
+## Permissions
+
+| Permission | Description | Default |
+| --- | --- | --- |
+| `smp.spawn.use` | Uses `/spawn` | true |
+| `smp.spawn.admin` | Uses `/spawn reload`,<br />`/setspawn`, and `/delspawn` | op |
+| `smp.spawn.bypass.countdown` | Bypasses the spawn teleport countdown | false |
+| `smp.spawn.bypass.cooldown` | Bypasses the spawn teleport cooldown | false |

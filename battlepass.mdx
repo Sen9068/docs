@@ -1,0 +1,79 @@
+---
+title: "Battlepass "
+description: "A cool reward system for players"
+---
+
+```r
+/Battlepass
+  |- Quests/
+  	|- daily.yml
+	|- weekly.yml
+  |- config.yml
+  |- messages.yml
+  |- gui.yml
+  |- levels.yml
+  |- battlepass.db
+```
+
+## Configuration
+
+```yaml
+premium-permission: smp.battlepass.premium # Permission for premium bp tiers
+xp-per-level: 1000 # Linear progression. Level 2 -> Level 3: 2 × xp-per-level = 2000 XP  
+difficulty-labels: # Labels for quest difficulty
+  easy: '#00FF07&lᴇᴀꜱʏ'
+  medium: '#FFF800&lᴍᴇᴅɪᴜᴍ'
+  hard: '#FF2323&lʜᴀʀᴅ'
+```
+
+`xp-per-level` › defines how much XP is needed to level up in the                            \\
+
+- Level 1 → Level 2: 1 × xp-per-level = 1000 XP\\
+- Level 2 → Level 3: 2 × xp-per-level = 2000 XP                   \\
+- Level 3 → Level 4: 3 × xp-per-level = 3000 XP                 <br />...and so on
+
+## Quests System
+
+```yaml
+amount: 5 # Amount of available daily quests (In the GUI)
+pool:
+  harvest_wheat:
+    name: Harvest Wheat
+    job: farming
+    difficulty: easy
+    target: 48
+    xp: 180
+    materials:
+    - WHEAT
+  mine_ores:
+    name: Mine Ores
+    job: mining
+    difficulty: medium
+    target: 32
+    xp: 260
+    materials:
+    - ORE
+
+# You can also remove/add new quests to the configuration          
+```
+
+## Quest Types (jobs)
+
+`farming` › Harvesting crops (wheat, carrots, etc.)<br />`mining` › Mining ore blocks<br />`smelting` › Smelting items in a furnace<br />`trading` › Trading with villagers<br />`hunting` › Killing mobs<br />`walking` › Walking/Running distance<br />`building` › Placing blocks
+
+I'll add more Quest Types in the new updates
+
+## Commands
+
+1. **/bp** › Opens battlepass GUI
+2. **/bp reload** › Reloads the battlepass configuration
+3. **/bp reset daily|monthly** › Resets the daily or monthly quests
+
+## Permissions
+
+| Permission | Description | Default |
+| --- | --- | --- |
+| `smp.battlepass.use` | Open the bp GUI | true |
+| `smp.battlepass.premium` | Claim premium rewards | op |
+| `smp.battlepass.reload` | Reload Configuration | op |
+| `smp.battlepass.reset` | Reset daily/monthly quests | op |

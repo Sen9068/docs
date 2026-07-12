@@ -1,0 +1,48 @@
+---
+title: "Warps"
+---
+
+```r
+/Warps
+  |- config.yml
+  |- gui.yml
+  |- messages.yml
+  |- warps.yml
+  |- warps.db
+```
+
+## Configuration
+
+```yaml
+teleport-delay: 5 # Teleport countdown delay
+
+action-bar:
+  teleporting: '&#BC6EFFWarps &8› &fTeleporting to {name} in &#BC6EFF{seconds}s'
+  cancelled: '&#BC6EFFWarps &8› &#FF2323Teleport cancelled because you moved'
+
+sounds:
+  enabled: true # If you want sound effects enabled
+  set-warp: UI_BUTTON_CLICK
+  teleport: ENTITY_ENDERMAN_TELEPORT
+  teleport-countdown: UI_BUTTON_CLICK
+  delete: UI_BUTTON_CLICK
+  error: ENTITY_VILLAGER_NO
+```
+
+## Commands
+
+1. **/warp (name)** › Teleports to a warp
+2. **/warps** › Opens the warps GUI
+3. **/warps reload** › Reloads the Warps configuration
+4. **/setwarp (name) \[display\] \[icon\] \[description\]** › Creates or updates a warp
+5. **/delwarp (name)** › Deletes a warp
+
+## Permissions
+
+| Permission | Description | Default |
+| --- | --- | --- |
+| `smp.warps.use` | Uses `/warp` and opens `/warps` | true |
+| `smp.warps.admin` | Creates and deletes warps with<br /> `/setwarp` and `/delwarp` | op |
+| `smp.warps.reload` | Reloads the Warps configuration with `/warps reload` | op |
+| `smp.warps.use.*` | Access every warp by name | true |
+| `smp.warps.*` | Access all warp commands | op |

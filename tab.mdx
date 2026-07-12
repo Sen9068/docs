@@ -1,0 +1,69 @@
+---
+title: "Tab"
+---
+
+```r
+/Tab
+  |- config.yml
+  |- messages.yml
+  |- scoreboard.yml
+```
+
+## Configuration
+
+```yaml
+settings:
+  update-interval-ticks: 10 # how often the tab system refreshes (in ticks)
+
+tablist:
+  enabled: true
+  format-player-names: true
+  player-name-format: '%luckperms_prefix%&f{player}'
+  header:
+  - ''
+  - <b><gradient:#B17CFF:#B17CFF><shadow:#8040DE:1>SMP</shadow></gradient></b>
+  - ''
+  footer:
+  - ''
+  - '&fOnline &8› &#B17CFF{online}/{max_players}'
+  - ''
+  - '         <gradient:#FFFFFF:#FFFFFF><shadow:#000000:1>ꜱᴇʀᴠᴇʀ.ᴄᴏᴍ</shadow></gradient>         '
+  - ''
+  sorting:
+    rank-priority: owner,admin,mod,helper,vip,default
+    enabled: true
+
+nametag:
+  hide-vanilla: false 
+
+belowname: # Text below the players nametag
+  value: '{health}'
+  title: '&#FF2323❤'
+  fallback-title: '' # Used if title is empty
+  fancy-value: '&f{health}'
+  render-type: HEARTS # Controls how the value is rendered: HEARTS, INTEGER
+  number-format: fixed # Fixed - Keeps consistent format, default - vanilla format
+  worlds: [] 
+	# Limits the setting to specific worlds
+	# Empty [] means it applies in all worlds
+  enabled: true
+
+animations:
+  server_name: # name of the animation
+    update-interval: 10 # animation update in ticks
+    frames:
+    - '&#BC6EFF&lSERVER'
+    - '&#A855F7&lSERVER'
+    - '&#7C3AED&lSERVER'
+    - '&#A855F7&lSERVER'
+```
+
+## Commands
+
+1. **/tab reload** › Reloads the Tab and scoreboard configuration
+
+## Permissions
+
+| Permission | Description | Default |
+| --- | --- | --- |
+| `smp.tab.*` | Allows using cmd /tab reload | op |

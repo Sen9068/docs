@@ -1,0 +1,176 @@
+---
+title: "Ban System"
+description: "Ban/Mute/Kick players from your server."
+---
+
+```r
+/BanSystem
+  |- Website/
+  	|- bans.html
+	|- card.html
+	|- empty.html
+	|- index.html
+	|- mutes.html
+	|- style.css
+  |- config.yml
+  |- messages.yml
+  |- webhook.yml
+  |- gui.yml
+  |- bansystem.db
+```
+
+---
+
+## Configuration
+
+```yaml highlight={24}
+defaults:
+  reason: 'No reason provided' # Default message when not adding a punish reason
+  ban-duration: 'permanent' # Default ban duration when not adding punish duration
+  mute-duration: 'permanent' # Default mute duration
+  kick-reason: 'Kicked by staff' # Default kick reason when not adding a kick reason
+  ban-reasons: # Premade ban reasons
+    - Cheating
+    - Xray
+    - Exploiting
+    - Griefing
+    - Staff disrespect
+  mute-reasons: # Premade mute reasons
+    - Spam
+    - Toxicity
+    - Advertising
+    - Harassment
+    - Staff disrespect
+
+time:
+  permanent-label: 'Permanent'
+  expired-cleanup-on-start: true 
+ 	# True = Old bans are deleted on server start. Keeps the database clean
+	# False = Expired bans stay in storage forever. needs manual cleanup
+# I recommend it leaving it on "true" because the DB will bloat over time
+
+mute:
+  block-commands: # Block commands when muted
+    - msg
+    - message
+    - tell
+    - w
+    - whisper
+    - r
+    - reply
+    - me
+    - minecraft:msg
+    - minecraft:tell
+    - minecraft:w
+    - minecraft:me
+
+gui:
+  refresh-after-action: true
+
+messages:
+  date-format: 'yyyy-MM-dd HH:mm:ss'
+
+website:
+  enabled: false # enable ban, mute list website
+  host: '0.0.0.0'
+  port: 0 # open a new port on for your server and add it here
+```
+
+---
+
+## Webhook
+
+```yaml highlight={22}
+enabled: false
+
+# Put one Discord webhook URL here to use it for every event.
+# You can still override the URL for a specific event below.
+url: ''
+username: SMP Punishments
+avatar-url: ''
+footer: SMP Punishments
+
+fields:
+  target: Player
+  staff: Staff
+  reason: Reason
+  duration: Duration
+  expires: Expires
+
+webhooks:
+  kick:
+    enabled: true
+    url: ''
+    title: Player kicked
+    color: 16753920 # Highly recommend color conversion https://www.spycolor.com/
+    username: SMP Punishments
+    avatar-url: ''
+  ban:
+    enabled: true
+    url: ''
+    title: Player banned
+    color: 16720675
+    username: SMP Punishments
+    avatar-url: ''
+  ip-ban:
+    enabled: true
+    url: ''
+    title: IP ban created
+    color: 16720675
+    username: SMP Punishments
+    avatar-url: ''
+  mute:
+    enabled: true
+    url: ''
+    title: Player muted
+    color: 12349183
+    username: SMP Punishments
+    avatar-url: ''
+  unban:
+    enabled: true
+    url: ''
+    title: Player unbanned
+    color: 1948444
+    username: SMP Punishments
+    avatar-url: ''
+  unmute:
+    enabled: true
+    url: ''
+    title: Player unmuted
+    color: 1948444
+    username: SMP Punishments
+    avatar-url: ''
+```
+
+---
+
+## Commands
+
+1. **/kick (player) \[reason\] \[duration\]** › Kicks a player from the server
+2. **/ban (player) \[reason\] \[duration\] ›** Bans a player from the server
+3. **/ban-ip (player) \[reason\] ›** Ban a player's IP adress
+4. **/mute (player) \[reason\]** › Mutes a player
+5. **/unban (player)** › Unbans a players
+6. **/unmute (player)** › Unmutes a player
+7. **/bansystem punishments** › Opens punishments GUI
+8. **/pumishments reload** › Reloads the configuration
+
+## Examples
+
+1. /ban Notch Hacking 7d
+2. /mute Notch Spam 1h
+
+## Permissions
+
+| Permission | Description | Default |
+| --- | --- | --- |
+| `smp.bansystem.kick` | /kick | op |
+| `smp.bansystem.ban` | /ban | op |
+| `smp.bansystem.banip` | /ban-ip | op |
+| `smp.bansystem.mute` | /mute | op |
+| `smp.bansystem.unban` | /unban | op |
+| `smp.bansystem.unmute` | /unmute | op |
+| `smp.bansystem.gui` | /bansystem punishments | op |
+| `smp.bansystem.notify` | /bansystem reload | op |
+| `smp.bansystem.notify` | Recieves staff notifications | op |
+| `smp.bansystem.*` | Gives full bansystem perms | op |

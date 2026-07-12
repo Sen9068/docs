@@ -1,0 +1,68 @@
+---
+title: "Leaderboard"
+---
+
+```r
+/Leaderboard
+  |- Holograms/
+	|- hologram.yml
+  |- config.yml
+  |- messages.yml
+  |- stats.db
+```
+
+## Configuration
+
+```yaml
+cache-update-interval: 5 # refreshes every 5 minutes from the db.
+default-billboard: CENTER # Default preset hologram billboard type
+# Billboard types: CENTER, FIXED, HORIZONTAL, VERTICAL
+
+presets: # Edit the leaderboard presets
+  topcoins:
+    title: "&#46fc64&l&nTOP MONEY"
+    subtitle: "&7ʟᴇᴀᴅᴇʀʙᴏᴀʀᴅ"
+    symbol: "$"
+    lines:
+      - "&#46fc64&l&nTOP MONEY"
+      - "&r&7ʟᴇᴀᴅᴇʀʙᴏᴀʀᴅ&r"
+      - "&r"
+      - "&#46fc64#1 &f%leaderboard_top_money_head_1% %leaderboard_top_money_name_1% &#46fc64%leaderboard_top_money_1%"
+      - "&#46fc64#2 &f%leaderboard_top_money_head_2% %leaderboard_top_money_name_2% &#46fc64%leaderboard_top_money_2%"
+      - "&#46fc64#3 &f%leaderboard_top_money_head_3% %leaderboard_top_money_name_3% &#46fc64%leaderboard_top_money_3%"
+      - "&#46fc64#4 &f%leaderboard_top_money_head_4% %leaderboard_top_money_name_4% &#46fc64%leaderboard_top_money_4%"
+      - "&#46fc64#5 &f%leaderboard_top_money_head_5% %leaderboard_top_money_name_5% &#46fc64%leaderboard_top_money_5%"
+      - "&#46fc64#6 &f%leaderboard_top_money_head_6% %leaderboard_top_money_name_6% &#46fc64%leaderboard_top_money_6%"
+      - "&#46fc64#7 &f%leaderboard_top_money_head_7% %leaderboard_top_money_name_7% &#46fc64%leaderboard_top_money_7%"
+      - "&#46fc64#8 &f%leaderboard_top_money_head_8% %leaderboard_top_money_name_8% &#46fc64%leaderboard_top_money_8%"
+      - "&#46fc64#9 &f%leaderboard_top_money_head_9% %leaderboard_top_money_name_9% &#46fc64%leaderboard_top_money_9%"
+      - "&#46fc64#10 &f%leaderboard_top_money_head_10% %leaderboard_top_money_name_10% &#46fc64%leaderboard_top_money_10%"
+...
+```
+
+## Commands
+
+1. **/leaderboard** › Opens the leaderboard GUI
+2. **/topkills** › Opens the kills leaderboard GUI
+3. **/topdeaths** › Opens the deaths leaderboard GUI
+4. **/playtimetop** › Opens the playtime leaderboard GUI
+5. **/hologram create \<preset\> \[name\]** › Creates a new hologram at your location
+6. **/hologram delete \<name\>** › Deletes a hologram
+7. **/hologram teleport \<name\>** › Teleports to a hologram
+8. **/hologram edit \<name\> movehere** › Moves hologram to your location
+9. **/hologram edit \<name\> billboard \<type\>** › Sets billboard type
+10. **/hologram edit \<name\> rotate \<yaw\>** › Rotates hologram horizontally
+11. **/hologram edit \<name\> rotatepitch \<pitch\>** › Rotates hologram vertically
+12. **/hologram edit \<name\> setline \<line\> \<text\>** › Sets a line's text
+13. **/hologram edit \<name\> visibilitydistance \<distance\>** › Sets visibility distance
+14. **/hologram edit \<name\> textshadow \<true|false\>** › Enables/disables text shadow
+15. **/hologram edit \<name\> background \<transparent|default\>** › Sets background
+16. **/hologram edit \<name\> scale \<1-10\>** › Sets hologram scale
+17. **/hologram edit \<name\> delete** › Deletes hologram via edit
+
+## Permissions
+
+| Permission | Description | Default |
+| --- | --- | --- |
+| `smp.playercommands.leaderboards` | Allows using /leaderboard, /topkills,<br /> /topdeaths, /playtimetop | true |
+| `smp.hologram.admin` | Full access to hologram <br />management commands | op |

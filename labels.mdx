@@ -1,0 +1,18 @@
+---
+title: "Labels"
+---
+
+Use this command while the target is online:<br />`/anticheat label <player> <legit|suspect|cheat|unknown>`
+
+The command requires `smp.anticheat.admin` or op.
+
+## Label Meanings
+
+| Label | Recommended use |
+| --- | --- |
+| `unknown` | Default state when staff have not reviewed the player. |
+| `legit` | Staff reviewed the player/sample context and considers the activity legitimate. |
+| `suspect` | Activity requires further observation but is not confirmed cheating. |
+| `cheat` | Staff confirmed cheating using multiple sources of evidence. |
+
+Changing a label updates the current entry in `behaviour_lables` and affects samples created afterward. It does not rewrite labels already stored in the old SQL or CSV lines. This preserves the original label that existed when each sample was collected

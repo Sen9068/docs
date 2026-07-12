@@ -1,0 +1,41 @@
+---
+title: "Combat"
+---
+
+```r
+/Combat
+  |- config.yml
+  |- messages.yml
+```
+
+## Configuration
+
+```yaml
+# This configuration is linked with the /smp settings Combat Rules
+
+enabled: true # If you want the smp setting enabled and this configuration too (linked)
+
+time-seconds: 15.0
+
+combat-timer: BOSSBAR # BOSSBAR or ACTIONBAR
+
+combat-log-punishment: KILL # KILL or NONE
+min-damage-to-tag: 1.0
+
+ban-riptide-in-combat: true
+ban-elytra-while-combat: true
+```
+
+## Commands
+
+1. **/combat** › Shows if you are tagged or now
+2. **/combat reload** › Reloads the combat configuration
+3. **/combat untag (player)** › Untags a player from combat
+
+## Permissions
+
+| Permission | Description | Default |
+| --- | --- | --- |
+| `smp.combat.status` | Allows using /combat | true |
+| `smp.combat.admin` | Allows /combat reload and /combat untag | op |
+| `smp.combat.bypass` | Prevents the player from receiving combat tags | false |

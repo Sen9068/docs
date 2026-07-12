@@ -1,0 +1,36 @@
+---
+title: "MOTD"
+---
+
+```r
+/MOTD
+  |- messages.yml
+  |- motd.yml
+```
+
+## MOTD Builder
+
+```yaml
+motd:
+  line1: '<center>&#B17CFF&lCRYSTAL SMP&r &7[1.21+]</center>'
+  line2: '<center><gradient:#FFFFFF:#FFFFFF><shadow:#000000:1>ᴅꜱᴄ.ɢɢ/ꜱᴍᴘ</shadow></gradient></center>'
+
+player-count-hover:
+  lines:
+    - ''
+```
+
+1. `<center>` and `</center>` › Inside the \<center\>\</center\> add the text you want to add and centers that in the MOTD
+2. `lines: []` › Completely disables the MOTD tooltip.<br />
+
+## Commands
+
+1. **/motd** › Shows the current MOTD in chat.
+2. **/motd reload** › Reloads the MOTD configuration
+
+## Permissions
+
+| Permission | Description | Default |
+| --- | --- | --- |
+| `smp.motd` | Allows the use of /motd | op |
+| `smp.motd.reload` | Allows /motd reload | op |

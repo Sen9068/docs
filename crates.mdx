@@ -1,0 +1,56 @@
+---
+title: "Crates"
+---
+
+```r
+/Crates
+  |- GUI/
+  	|- confirmgui.yml
+	|- gui.yml
+  |- config.yml
+  |- messages.yml
+  |- crates.yml
+  |- crates.db
+```
+
+## Configuration
+
+```yaml
+settings:
+  holograms-enabled: false # If you want to show the crates hologram
+sounds:
+  editor-click:
+    name: UI_BUTTON_CLICK
+    volume: 1.0
+    pitch: 1.0
+  reward-claimed:
+    name: ENTITY_PLAYER_LEVELUP
+    volume: 1.0
+    pitch: 1.15
+```
+
+#### How to edit the Hologram?
+
+To edit the hologram, simply use
+
+## Commands
+
+1. **/crates** › Shows Crates help
+2. **/crates \<crate\>** › Opens a crate preview GUI
+3. **/crates create \<name\>** › Creates a new crate
+4. **/crates delete \<name\>** › Deletes an existing crate
+5. **/crates editor** › Opens the crates editor GUI
+6. **/crates key give \<player|all\> \<key\> \[amount\]** › Gives crate keys to a player or all online players
+7. **/crates teleport \<crate\>** › Teleports to a placed crate
+8. **/crates reload** › Reloads the Crates configuration
+
+## Permissions
+
+| Permission | Description | Default |
+| --- | --- | --- |
+| `smp.crate.use` | Allows using the Crates command<br /> and opening crate previews | true |
+| `smp.crate.admin` | Allows managing crates, opening the editor,<br />placing/removing crates, teleporting to crates <br />and reloading Crates | false |
+| `smp.crate.give` | Give crate items to players | false |
+| `smp.key.use` | Allows using key commands <br />declared in plugin.yml | true |
+| `smp.key.give` | Allows giving crate keys with /crates key give | false |
+| `smp.crate.bypasscooldown` | Bypasses crate opening cooldowns | false |

@@ -1,0 +1,37 @@
+---
+title: "Configuration"
+---
+
+```r
+/Auction
+  |- Behaviour/
+  	|- behaviour.db
+	|- behavior.db-shm
+	|- behavior.db-wal
+	|- behavior-data.csv
+  |- config.yml
+  |- messages.yml
+  |- gui.yml
+  |- webhook.yml
+```
+
+All the configuration docs are in the [Check Types](/check-types), [Check Configuration](/check-configuration) and the behaviour docs are in [Introduction](/introduction), [CSV](/csv), [Labels](/labels) and [Anomaly Score](/anomaly-score)
+
+## Commands
+
+1. **/anticheat** or **/ac** › Shows the Anticheat help menu
+2. **/anticheat reload** › Reloads the Anticheat configuration and checks
+3. **/anticheat alerts on** › Enables Anticheat alerts
+4. **/anticheat alerts off** › Disables Anticheat alerts
+5. **/anticheat gui** › Opens the suspects GUI
+6. **/anticheat info \<player\>** › Opens detailed Anticheat information for a player or recorded suspect
+7. **/anticheat label \<player\> \<legit|suspect|cheat|unknown\>** › Assigns a [Behaviour](/labels) profiler label to an online player
+
+## Permissions
+
+| Permission | Description | Default |
+| --- | --- | --- |
+| `smp.anticheat.admin` | Access to Anticheat reload, GUI, player information, Behaviour labels, and Silent TP. | op |
+| `smp.anticheat.alerts` | Receives Anticheat alerts and allows personal alert toggling. | op |
+| `smp.anticheat.bypass` | Bypasses Anticheat gameplay, movement, combat, block, and packet checks. | false |
+| `smp.anticheat.bypass.commands` | Bypasses commands blocked by the Anticheat command blocker. | op |

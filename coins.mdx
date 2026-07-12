@@ -1,0 +1,48 @@
+---
+title: "Coins"
+---
+
+```r
+/Coins
+  |- config.yml
+  |- messages.yml
+  |- coins.db
+```
+
+## Configuration
+
+```yaml
+starting-balance: 0.0 # Players balance when he joins for the first time
+
+currency-symbol: '' # Currency symbol which shows with the placeholder
+```
+
+## Commands
+
+1. **/coins (player)** › Shows players coins
+2. **/coins give (player) \<amount\>** › Gives player coins
+3. **/coins set (player) \<amount\>** › Sets player the set coins amount
+4. **/coins take (player) \<amount\>** › Takes specific amount of coins from players balance
+5. **/coins reset (player)** › Resets player balance
+6. **/coins reset all** › Resets coins balance of all players who joined the server
+7. **/coins reload** › Reloads the Coins configuration<br /><br />**/coins reset (player)** and **/coins reset all** are **CONSOLE** only commands for safety reasons.
+
+## Permissions
+
+| Permission | Description | Default |
+| --- | --- | --- |
+| `smp.coins.use` | Allows the use of basic Coins commands | true |
+| `smp.coins.balance.others` | Allows using /coins (player) cmd | op |
+| `smp.coins.give` | Allow giving coins | op |
+| `smp.coins.set` | Allows setting coins | op |
+| `smp.coins.take` | Allows taking coins | op |
+| `smp.coins.reload` | Allows reloading the Coins configuration | op |
+| `smp.coins.*` | Bypasses all the commands | op |
+
+## Placeholders
+
+| Placeholder | Example |
+| --- | --- |
+| `%smp_coins_short%` | 1.1K • 1M • 6.7B |
+| `%smp_coins_formatted%` | 1,100 • 1,500 |
+| `%smp_coins%` | Raw Balance › 1535.3324 |

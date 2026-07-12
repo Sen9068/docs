@@ -1,0 +1,83 @@
+---
+title: "Bossbar"
+---
+
+```r
+/Bossbar
+  |- config.yml
+  |- messages.yml
+  |- players.yml
+```
+
+## Configuration
+
+### One Bossbar
+
+```yaml
+settings:
+  update-interval-ticks: 20 # Update interval for bossbar update (1 second)
+
+bossbars:
+  welcome: # custom bossbar "welcome"
+    enabled: true
+    titles:
+      - '&#BC6EFF&lSMP &8› &fWelcome to the server'
+      - '&#00E5FF&lSMP &8› &fInvite your friends'
+      - '&#FFD166&lSMP &8› &fEnjoy your stay'
+    animation-interval-ticks: 60
+    color: PURPLE
+    style: SOLID
+    progress: 1.0
+    permission: ''
+    worlds: []
+    flags: []
+```
+
+### Multiple Bossbars
+
+```yaml
+settings:
+  update-interval-ticks: 20 # Update interval for bossbar update (1 second)
+
+bossbars:
+  welcome: # custom bossbar "welcome"
+    enabled: true
+    titles:
+      - '&#BC6EFF&lSMP &8› &fWelcome to the server'
+      - '&#00E5FF&lSMP &8› &fInvite your friends'
+      - '&#FFD166&lSMP &8› &fEnjoy your stay'
+    animation-interval-ticks: 60 # set interval how frequently the bossbar changes
+    color: PURPLE
+    style: SOLID
+    progress: 1.0 
+    permission: '' # Permission if permission set then it only shows to those with it
+    worlds: [] # Specific world bossbar
+    flags: [] 
+
+test: # 2nd bossbar
+    enabled: true
+    titles:
+      - '&#BC6EFF&lSMP &8› &fTest Bossbar'
+    animation-interval-ticks: 60
+    color: PURPLE
+    style: SOLID # Other: SEGMENTED_6, SEGMENTED_10
+    progress: 1.0 # Shows full bar
+    permission: 'smp.bossbar.vip' # custom bossbar
+    worlds: 
+	- world_nether # Shows only in nether world
+    flags:  
+	- CREATE_FOG # Creates fog when bossbar activated
+	
+```
+
+## Commands
+
+1. **/bossbar on (bossbar\_name)** › Turns bossbar on (if not on)
+2. **/bossbar off (bossbar\_name)** › Turns bossbar off
+3. **/bossbar reload** › Reloads the bossbar configuration
+
+## Permissions
+
+| Permission | Description | Default |
+| --- | --- | --- |
+| `smp.bossbar.*` | /bossbar reload, /bossbar on\|off | op |

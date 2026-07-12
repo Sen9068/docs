@@ -1,0 +1,38 @@
+---
+title: "Economy"
+---
+
+```r
+/Economy
+  |- config.yml
+  |- messages.yml
+  |- economy.db
+```
+
+## Configuration
+
+```yaml
+starting-balance: 0.0 # Players balance when he joins for the first time
+currency-symbol: '$' # Currency symbol which shows with the placeholder
+```
+
+## Commands
+
+1. **/balance (player)** › Shows players balance
+2. **/balance** › Shows  your balance
+3. **/money give (player) \<amount\>** › Gives player money
+4. **/money set (player) \<amount\>** › Sets player the set money amount
+5. **/money take (player) \<amount\>** › Takes specific amount of money from players balance
+6. **/money reset (player)** › Resets player balance
+7. **/money reset all** › Resets money balance of all players who joined the server
+8. **/money reload** › Reloads the Economy configuration<br /><br />**/money reset (player)** and **/money reset all** are **CONSOLE** only commands for safety reasons.
+
+## Permissions
+
+| Permission | Description | Default |
+| --- | --- | --- |
+| `smp.economy.balance.others` | Allows using /money (player) | true |
+| `smp.economy.give` | Allow giving money | op |
+| `smp.economy.set` | Allows setting money | op |
+| `smp.economy.take` | Allows taking money | op |
+| `smp.economy.*` | Bypasses all the commands | op |

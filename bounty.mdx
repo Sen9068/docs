@@ -1,0 +1,61 @@
+---
+title: "Bounty"
+---
+
+```r
+/Bounty
+  |- config.yml
+  |- messages.yml
+  |- gui.yml
+  |- bounties.db
+```
+
+## Configuration
+
+```yaml
+min-bounty: 100 # minimum bounty prize when adding a bounty
+max-bounty: 1000000 # maximum bounty prize
+
+tax-percentage: 0 # how much does the player has to pay on tax
+allow-self-bounty: false # If player can put bounties on theirselves
+broadcast-placed: true # Global server message when someone places a bounty
+broadcast-claimed: true # Global server message when someone claims a bounty
+
+sounds:
+  click: UI_BUTTON_CLICK
+  search: ENTITY_EXPERIENCE_ORB_PICKUP
+  claim: ENTITY_PLAYER_LEVELUP
+  place: ENTITY_EXPERIENCE_ORB_PICKUP
+  enabled: true # if sounds are enabled
+head-drop: false # if a player gets killed if his head will drop
+bounty-expiration-days: 0 
+show-bounty-indicator: true
+bounty-indicator: ' §c[BOUNTY]§r' # placeholder format for active player bounty
+gui:
+  page-size: 45
+  auto-refresh-enabled: false
+  auto-refresh-ticks: 100
+max-bounties: 5 # max bounties per 1 player
+```
+
+The placeholder for `bounty-indicator` is `%smp_bounty_indicator%`**.** Basically if you put the placeholder in the Chat for e.g before the players name then it shows the `bounty-indicator` if the player has a bounty placed on him.
+
+## Commands
+
+1. **/bounty** › Opens Bounty GUI
+2. **/bounty (player)** › Opens the bounty GUI with that player as the search query
+3. **/bounty add \<player\> \<amount\> \[reason\]** › Adds bounty
+4. **/bounty remove \<id\>** › Removes bounty (removes your own bounties)
+5. **/bounty check (player)** › Checks players bounty status
+6. **/bounty reload** › Reloads Bounty configuration
+
+## Permissions
+
+| Permission | Description | Default |
+| --- | --- | --- |
+| `smp.bounty.use` | allows using /bounty to open the bounty GUI | true |
+| `smp.bounty.add` | allows placing bounties | true |
+| `smp.bounty.remove` | allows removing your own bounties | true |
+| `smp.bounty.check` | allows checking bounty info with | true |
+| `smp.bounty.reload` | Reloads bounty configuration | op |
+| `smp.bounty.admin` | Bypasses all permissions | op |

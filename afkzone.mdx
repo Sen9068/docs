@@ -1,0 +1,50 @@
+---
+title: "Afk Zone"
+description: "Afk Zone lets you create & configure an Afk Zone where players can Afk for rewards"
+---
+
+The AfkZone folder contains:
+
+```r
+/AfkZone
+  |- zones/
+  	|- yourzone.yml
+  |- config.yml
+  |- messages.yml
+  |- gui.yml
+```
+
+---
+
+## Configuration
+
+```yaml
+reward-check-interval-ticks: 20 # Checks/updates AFK rewards every 1 second
+particle-display-interval-ticks: 10 #  Displays AFK particles every 0.5 seconds
+
+# 20 ticks = 1 second
+```
+
+## Admin Commands
+
+1. **/afkzone** › Shows every /afkzone command
+   <Frame>
+     <img
+       src="/images/Screenshot-from-2026-07-08-22-19-27.png"
+       alt="Screenshot From 2026 07 08 22 19 27"
+       title="Screenshot From 2026 07 08 22 19 27"
+       className="mx-auto"
+     />
+   </Frame>
+
+## Player Commands
+
+1. **/afk (afkzone)** › Teleports to Afk Zone
+
+## Permissions
+
+| Permission | Description | Default |
+| --- | --- | --- |
+| `smp.afkzone.use` | Allows using Afk Zones and /afk (afkzone) | true |
+| `smp.afkzone.admin` | Allows full Afk Zone admin usage | op |
+| `smp.afkzone.<name>` | Editable in afk configuration. You can set a <br />specific permission for the afk zone. | false |

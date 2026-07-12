@@ -1,0 +1,56 @@
+---
+title: "Tags"
+---
+
+```r
+/Tags
+  |- config.yml
+  |- messages.yml
+  |- gui.yml
+  |- tags.db
+```
+
+## Configuration
+
+```yaml
+default-tag: '' # Default tags for players when they join
+
+tags:
+  member:
+    display: '&#8B8B8B[Member]'
+    permission: '' # No permission needed for this tag
+  vip:
+    display: '&#FFD700[VIP]'
+    permission: smp.tags.vip
+  vip_plus:
+    display: '&#FFD700[VIP&#00FF1C+&#FFD700]'
+    permission: smp.tags.vipplus
+  admin:
+    display: '&#FF2323[Admin]'
+    permission: smp.tags.admin
+  mod:
+    display: '&#3D7BFF[Mod]'
+    permission: smp.tags.mod
+  builder:
+    display: '&#FF9B3D[Builder]'
+    permission: smp.tags.builder
+```
+
+## Commands
+
+1. **/tags** or **/tag** › Opens the Tags GUI
+2. **/tags clear** or **/tag clear** › Clears your active tag
+3. **/tags list** or **/tag list** › Lists available tags
+4. **/tags create (id) (display)** › Creates a new tag
+5. **/tags edit (id)** › Edits an existing tag
+6. **/tags delete (id)** › Deletes a tag
+7. **/tags reload** › Reloads the Tags configuration
+
+## Permissions
+
+| Permission | Description | Default |
+| --- | --- | --- |
+| `smp.tags.use` | Opens the Tags GUI and uses basic tag commands | true |
+| `smp.tags.admin` | Creates, edits, and deletes tags | op |
+| `smp.tags.reload` | Reloads the Tags configuration | op |
+| `smp.tags.<tag>` | If you have a tag with a permission then you need<br />the permission for it to use it | false |

@@ -1,0 +1,91 @@
+---
+title: "Billford"
+---
+
+```r
+/Billford
+  |- config.yml
+  |- messages.yml
+```
+
+## Configuration
+
+```yaml
+settings:
+  refresh-hours: 24 # How frequently the billford craft recipe resets
+  title: '&8Billford' # GUI title
+
+gui:
+  size: 36 # GUI slot size
+  ingredient-slots: [10, 11, 12] # Slots where the ingredients are
+  result-slot: 15 # Slot where the ingredient result slot is
+  craft-button:
+    slot: 13
+    material: HOPPER
+    name: '&#BC6EFFᴄʀᴀꜰᴛ'
+    lore:
+      - '{status}'
+  info-book:
+    slot: 31
+    material: BOOK
+    name: '&#BC6EFFɪɴꜰᴏʀᴍᴀᴛɪᴏɴ'
+    lore:
+      - '&fA random crafting recipe '
+      - '&fappears here every 24 hours'
+```
+
+### One material based craft
+
+```yaml
+crafts:
+  charcoal_boost: # craft name
+    weight: 100
+    ingredients: # Add only 1 material with the amount of that one item
+      - material: OAK_LOG
+        amount: 8
+    result:
+      material: CHARCOAL # Result materail what the player gets
+      amount: 16 # How many result items the player gets
+```
+
+### Multi based material craft
+
+```yaml
+torch_bulk:
+    weight: 90
+    ingredients:
+      - material: COAL # 1st material
+        amount: 1
+      - material: STICK # 2nd material
+        amount: 1
+    result:
+      material: TORCH
+      amount: 16
+```
+
+### What does weight mean? For example `weight: 100`
+
+The weight: 100 in Billford's config.yml controls probability in a weighted random selection
+
+**Here's how it works**
+
+1. All crafts' weights are summed to get a totalWeight
+2. A random number is picked from 0 to totalWeight
+3. Each craft's weight is added cumulatively until the random number is reached
+
+**In our example** `weight: 100`
+
+- It means the recipe has a 100 "chance unit" out of the total                                                            - Weights range from 1 to 100 (common items have 80-100, rare items have 1-5                          \\
+- Higher weight = more likely to appear as the daily offer
+
+## Commands
+
+1. **/billford** › Opens Billford GUI
+2. **/billford reload** › Reloads the Billford configuration
+
+## Permissions
+
+| Permission | Description | Default |
+| --- | --- | --- |
+| `smp.billford.use` | Allows /billford usage | true |
+| `smp.billford.admin` | Allows /billford reload | op |

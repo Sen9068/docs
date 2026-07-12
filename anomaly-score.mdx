@@ -1,0 +1,33 @@
+---
+title: "Anomaly Score"
+---
+
+## How Anomaly Score Is Calculated
+
+The profiler evaluates these signals against<br />`behaviour-profiler.weights` :
+
+1. max. horizontal movement
+2. avg. horizontal movement
+3. max. airborne sequence
+4. CPS
+5. APS
+6. max. reach
+7. Scaffold placement angle
+8. max. yaw snap
+9. Low rotation variance
+10. Total anticheat VL<br />
+
+For ordinary over-threshold signals no score is added while t he value is at or below `threshold` Above the threshold the contribution rises gradually until it reaches the signals configured `weight: ` . Low variance works in the opposite direction: Variance below its threshold adds score but only when roatation average reaches `min-average`.
+
+All signal contributions are added together. When the final value reaches `behavior-profiler.alert-score`, the profiler submits a `BehaviorAnomaly` suspicious sample. The normal `checks.behavior-anomaly.buffer`, `violation`, and `kick-vl` settings then control whether it alerts, adds VL, or executes punishment commands.
+
+`behavior-profiler.alert-cooldown-seconds` prevents repeated BehaviorAnomaly submissions for the same player during the cooldown. Samples continue to be saved during that time.
+
+## Interpretation and Safety Notes:
+
+- Anomaly score is not a cheating probability.
+- A high score means several configured signals exceeded their baselines. it does not establish intent or identify a specific hack.
+- Always compare suspicious rows with ping, TPS, active effects, server mechanics, normal Anticheat flags, and staff observation.
+- Do not automatically ban solely from a behavior label or one high anomaly sample.
+- Labels are staff annotations and can be wrong. Use consistent review standards when creating a labeled dataset.
+- If behavior data is exported or used for model training, remove data that is not necessary and follow applicable privacy requirements.

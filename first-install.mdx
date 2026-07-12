@@ -1,0 +1,105 @@
+---
+title: "ℹ️ First Install"
+---
+
+Welcome to SMP. This page covers the first installation, the recommended first steps, and the most common operational tasks.
+
+## Requirements
+
+- Paper 1.21.x or a compatible server build.
+- Java 21.
+- The plugin metadata has Folia support; always test the released jar with your exact server version.
+
+SMP declares the following integrations as soft dependencies. The plugin can start without them, but related features will be limited:
+
+| Plugin | Used for |
+| --- | --- |
+| [ProtocolLib](https://www.spigotmc.org/resources/protocollib.1997/) | Packet-based anticheat checks and the client health-indicator setting |
+| [PlaceholderAPI](https://modrinth.com/plugin/placeholderapi) | Placeholders in chat, tab, holograms, join/leave messages<br />and module GUIs |
+| [LuckPerms](https://modrinth.com/plugin/luckperms) | Permission management and permission-based formatting/integrations |
+
+## 1. Installing
+
+<Warning>
+  Install the recommended integrations before SMP so every optional feature can enable correctly.
+</Warning>
+
+1. Download the latest SMP release jar.
+2. Put the SMP jar in the server's `plugins` folder.
+3. Put ProtocolLib, PlaceholderAPI, and LuckPerms in the same folder.
+4. Start or restart the server.
+5. Wait for the server to finish loading all plugins.
+
+## 2. Verify the installation
+
+After the server has fully started:
+
+1. Run `/plugins` and confirm that SMP and the integrations you installed are enabled.
+2. Check the server console for module initialization errors.
+3. Confirm that the generated `plugins/SMP` folder contains the module configuration files.
+4. Test `/smp settings` as an administrator.
+
+If a module is disabled or an integration is missing, SMP normally logs which feature was skipped. Always check the console before troubleshooting commands.
+
+## 3. First-time setup
+
+1. Open `/smp settings` and review the server rules before players join.
+2. Open `plugins/SMP/config.yml` and enable or disable modules under `modules:`.
+3. Configure the modules you plan to use, then run `/smp reload` or restart the server when required.
+4. Use LuckPerms to assign player and staff permissions.
+5. Test the important player and staff workflows with non-operator accounts.
+
+The complete permission reference is available in [Permissions](permissions.md). Feature-specific documentation is available in [Crates](crates.md).
+
+<Frame>
+  ![SMP server settings screen](/images/Screenshot-from-2026-07-10-12-20-24.png)
+</Frame>
+
+## Important commands
+
+### `/smp settings`
+
+Opens the server settings GUI. It controls important global gameplay rules, so review it before opening the server to players.
+
+Required permission: `smp.admin`
+
+### `/smp reload`
+
+Reloads the plugin configuration and module setup. Use it after editing configuration files, but restart the server after installing a new jar, changing dependencies, or making changes that require a full plugin restart.
+
+Required permission: `smp.admin`
+
+### `/smp update`
+
+Checks the configured update endpoint for a newer release and reports the result to the command sender.
+
+Required permission: `smp.admin`
+
+## Configuration and backups
+
+- Edit generated files inside `plugins/SMP`, not files inside the jar.
+- Back up the entire `plugins/SMP` folder before updating the plugin or changing database-backed modules.
+- Keep webhook URLs, tokens, and other private integration values out of screenshots and public repositories.
+- Use a full server restart after restoring a backup so every module reloads its data consistently.
+
+## Troubleshooting
+
+### SMP does not enable
+
+Check the first SMP error in the console, verify Java 21, and confirm that the server is running a supported Paper/Folia version. Also check that the jar is not corrupted and that its filename is not a source or API jar.
+
+### A command is missing
+
+Confirm that the relevant module is enabled under `modules:` and that the sender has the command's permission. If the module was recently enabled or disabled, restart the server.
+
+### Placeholders or packet features do not work
+
+Confirm that PlaceholderAPI or ProtocolLib is enabled in `/plugins`, then restart the server and check the SMP startup log for the module's integration message.
+
+### Configuration changes are not visible
+
+Check the YAML indentation and the exact configuration path, then run `/smp reload`. If the change affects module startup, install/upgrade behavior, or a dependency, perform a full restart instead.
+
+### More help
+
+When reporting a problem, include the server version, Java version, SMP version, enabled integrations, the relevant configuration section, and the complete first error/stack trace from the console.

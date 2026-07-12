@@ -1,0 +1,125 @@
+---
+title: "Shop"
+---
+
+```r
+/Shop
+  |- categories/
+	|- blocks.yml
+	|- redstone.yml
+	|- spawners.yml
+  |- config.yml
+  |- messages.yml
+```
+
+## Configuration
+
+```yaml
+gui:
+  filler-material: BLACK_STAINED_GLASS_PANE
+  filler-name: ' '
+  fill-empty-slots: false
+  
+  main-menu:
+    title: '&8Shop'
+    size: 27
+  
+  category-menu:
+    title: '&8Shop &8› &8{category}'
+    size: 54
+    back-button:
+      slot: 49
+      material: BARRIER
+      name: '&#FF2525ʙᴀᴄᴋ'
+      lore: []
+    previous-page:
+      slot: 48
+      material: ARROW
+      name: '&#BC6EFFᴘʀᴇᴠɪᴏᴜꜱ ᴘᴀɢᴇ'
+      lore: []
+    next-page:
+      slot: 50
+      material: ARROW
+      name: '&#BC6EFFɴᴇxᴛ ᴘᴀɢᴇ'
+      lore: []
+  
+  confirm-menu:
+    title: '&8Confirm Purchase'
+    size: 27
+    fill-empty-slots: false
+    info-item:
+      slot: 13
+      name: '&f{item}'
+      lore:
+      - '&7Price: &#0EFF00{price}'
+    confirm-button:
+      slot: 23
+      material: LIME_STAINED_GLASS_PANE
+      name: '&#0EFF00ᴄᴏɴꜰɪʀᴍ'
+      lore: []
+    cancel-button:
+      slot: 21
+      material: RED_STAINED_GLASS_PANE
+      name: '&#FF2525ᴄᴀɴᴄᴇʟ'
+      lore: []
+    adjustments:
+      minus-10:
+        slot: 9
+        amount: -10
+        material: RED_STAINED_GLASS_PANE
+        name: '&#FF2525-10'
+      minus-5:
+        slot: 10
+        amount: -5
+        material: RED_STAINED_GLASS_PANE
+        name: '&#FF2525-5'
+      minus-1:
+        slot: 11
+        amount: -1
+        material: RED_STAINED_GLASS_PANE
+        name: '&#FF2525-1'
+      plus-1:
+        slot: 15
+        amount: 1
+        material: LIME_STAINED_GLASS_PANE
+        name: '&#0EFF00+1'
+      plus-5:
+        slot: 16
+        amount: 5
+        material: LIME_STAINED_GLASS_PANE
+        name: '&#0EFF00+5'
+      plus-10:
+        slot: 17
+        amount: 10
+        material: LIME_STAINED_GLASS_PANE
+        name: '&#0EFF00+10'
+
+transaction:
+  play-sound: true
+  purchase-sound: ENTITY_EXPERIENCE_ORB_PICKUP
+  error-sound: ENTITY_VILLAGER_NO
+category-gui-sizes:
+  blocks:
+    size: 54
+  spawners:
+    size: 54
+  tools:
+    size: 54
+  redstone:
+    size: 54
+```
+
+## Commands
+
+1. **/shop** › Opens the main shop GUI
+2. **/shop reload** › Reloads the Shop configuration
+3. **/shop add (category) \[price\]** › Adds the item in your hand to a shop category
+
+## Permissions
+
+| Permission | Description | Default |
+| --- | --- | --- |
+| `smp.shop.use` | Opens the shop with `/shop` | true |
+| `smp.shop.reload` | Reloads the Shop configuration with `/shop reload` | op |
+| `smp.shop.admin` | Adds items to categories with `/shop add` | op |
+| `smp.shop.*` | Access all shop commands | true |

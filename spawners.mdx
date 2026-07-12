@@ -1,0 +1,56 @@
+---
+title: "Spawners"
+---
+
+```r
+/Spawners
+  |- data/
+	|- 
+  |- config.yml
+  |- messages.yml
+  |- gui.yml
+```
+
+## Configuration
+
+```yaml
+settings:
+  debug: false
+  default-limit: 4 # This is the base number of custom spawners a player can place
+
+spawners:
+  COW:
+    display-name: '&#BC6EFFCow Spawner'
+    mob-type: COW
+    loot:
+      LEATHER:
+        chance: 100
+        min: 1
+        max: 3
+        price: 5.0
+      BEEF:
+        chance: 100
+        min: 1
+        max: 2
+        price: 3.0
+    base:
+      production-interval: 400
+		# This is how often that spawner produces loot, in ticks.
+       	# 400 ticks is 20 seconds.
+		# Lower number = faster production 
+		# higher number = slower production
+```
+
+## Commands
+
+1. **/givespawner (player) (spawner)** › Gives a custom spawner to a player
+2. **/givespawner reload** › Reloads the Spawners configuration
+
+## Permissions
+
+| Permission | Description | Default |
+| --- | --- | --- |
+| `smp.spawner.give` | Gives spawners to players<br />and reloads the Spawners configuration | op |
+| `smp.spawner.use` | Uses the Spawner GUI | true |
+| `smp.spawner.limit.bypass` | Bypasses the custom spawner limit | op |
+| `smp.vip.spawner` | Grants VIP spawner benefits <br />such as a higher limit | false |

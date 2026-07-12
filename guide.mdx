@@ -1,0 +1,56 @@
+---
+title: "Guide"
+---
+
+```r
+/Guide
+  |- gui.yml
+```
+
+## GUI
+
+### Left Click Types
+
+`[player]`
+
+1. You can use either `[player] rtp`  or `player homes` which opens the plugins GUIs
+
+```markdown
+# Every plugin based [player] command type
+
+[player] bounty
+[player] team
+[player] shop
+[player] orders
+[player] settings
+[player] duel
+[player] ah
+[player] homes
+[player] rtp
+[player] kit
+[player] coins
+[player] playtimetop
+[player] discord
+```
+
+2. You can also add custom commands if you want
+
+`[console]` 
+
+1. When you use \[console\] in a click command, the server itself executes the command, not the player
+   ```yaml
+   left-click-commands:
+       - '[console] say Welcome to the server!'
+   ```
+
+                                 When a player clicks this item, the server console runs
+
+2. When a player clicks the commands then the server runs
+
+```markdown
+[CONSOLE] say Welcome to the server!
+```
+
+## Commands
+
+## Permissions

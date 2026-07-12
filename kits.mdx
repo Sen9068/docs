@@ -1,0 +1,48 @@
+---
+title: "Kits"
+---
+
+```r
+/Kits
+  |- GUIs/
+	|- gui.yml
+  |- config.yml
+  |- messages.yml
+  |- kits.yml
+  |- kits.db
+```
+
+## Configuration
+
+```yaml
+gui:
+  filler-material: AIR # Empty GUI filler name (AIR = Empty)
+  filler-name: ' '
+```
+
+## Commands
+
+1. **/kit** › Opens the kits GUI to claim available kits
+2. **/kit \<kitname\>** › Directly claims a specific kit (if available)
+3. **/kit create \<name\>** › Creates a new kit
+4. **/kit delete \<name\>** › Deletes an existing kit
+5. **/kit list** › Lists all available kits with cooldowns
+6. **/kit reload** › Reloads the Kits configuration (admin)
+7. **/kit seticon \<kit\> \[material\]** › Sets the icon for a kit (admin)
+8. **/kit setcooldown \<kit\> \<seconds\>** › Sets cooldown for a kit (admin)
+9. **/kit setpermission \<kit\> \<permission|none\>** › Sets required permission for a kit (admin)
+10. **/kit setfirstjoin \<kit\> \<true|false\>** › Sets kit as first-join reward (admin)
+11. **/kit setdeathkit \<kit\> \<true|false\>** › Sets kit as death-respawn reward (admin)
+12. **/kit save \<kitname\>** › Saves your current inventory as kit items (admin)
+13. **/kit edit \<kitname\>** › Opens the kit editor GUI (admin)
+14. **/kiteditor \<kitname\>** › Opens the kit editor GUI (admin)
+
+## Permissions
+
+| Permission | Description | Default |
+| --- | --- | --- |
+| `smp.command.kit` | Allows using the /kit command | true |
+| `smp.kit` | Allows claiming kits and opening kits GUI | true |
+| `smp.kits` | Allows using /kit list to see available kits | true |
+| `smp.kit.admin` | Full admin access - create, delete,<br />edit, reload, configure kits | op |
+| `smp.kit.<name>` | Per-kit permission (e.g., `smp.kit.vip` for VIP kit) | false |

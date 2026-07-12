@@ -1,0 +1,87 @@
+---
+title: "Check Types"
+---
+
+## Movement Checks
+
+| Check | Config ID | Description |
+| --- | --- | --- |
+| Speed | `speed` | Detects players moving horizontally faster <br />than their current movement conditions allow. <br />It accounts for effects and common <br />legitimate movement states. |
+| Fly | `fly` | Detects sustained movement or hovering <br />in the air without flight, a vehicle, <br />or another legitimate cause. |
+| Glide | `glide` | Detects players falling substantially <br />slower than normal without a <br />valid slow-falling or gliding condition. |
+| Step | `step` | Detects players climbing blocks <br />with an upward step larger than <br />normal Minecraft movement permits. |
+| HighJump | `high-jump` | Detects a player rising significantly higher than <br />a normal jump without an allowed effect or <br />movement source. |
+| FastClimb | `fastclimb` | Detects climbing ladders, vines, <br />and similar blocks faster than normally possible. |
+| WaterWalk | `water-walk` | Detects sustained movement on <br />top of liquid as if it were solid ground. <br />Liquid-entry and exit grace reduces false flags. |
+| NoFall | `nofall` | Detects players avoiding expected fall damage <br />or falsely reporting a safe landing after a <br />significant fall. |
+| GroundSpoof | `ground-spoof` | Detects a client claiming to be on the ground while <br />the server sees no valid supporting block. |
+| InventoryMove | `inventory-move` | Detects movement while an inventory interface <br />is open when that movement should not be possible. |
+| Timer | `timer` | Detects clients running game movement ticks faster <br />than the normal Minecraft tick rate. |
+
+## Combat Checks
+
+| Check | Config ID | Description |
+| --- | --- | --- |
+| Reach | `reach` | Detects attacks made from farther away <br />than the configured legitimate combat reach. |
+| NoSwing | `no-swing` | Detects attacks that are not accompanied by<br />a normal arm-swing animation. |
+| AttackSpeed | `attack-speed` | Detects an abnormally high number of attacks <br />in a short time. |
+| KillAura | `killaura` | Detects suspicious automated combat patterns,<br /> including rapid target switching and multi-target attacks. |
+| AimAngle | `aim-angle` | Detects attacks where the player's view direction is too<br />far away from the target. |
+| AimPattern | `aim-pattern` | Detects repeated, mechanically consistent, or <br />implausible rotation patterns associated with <br />automated aiming. |
+| Criticals | `criticals` | Detects invalid critical hits produced without a <br />legitimate falling state. |
+| AutoClicker | `autoclicker` | Detects excessively high or suspiciously <br />consistent clicking based on arm-animation packets. |
+
+## Block and World Checks
+
+| Check | Config ID | Description |
+| --- | --- | --- |
+| FastPlace | `fastplace` | Detects blocks being placed faster than <br />the configured minimum placement interval. |
+| AirPlace | `air-place` | Detects blocks placed without an <br />adjacent supporting block, which <br />normal placement does not permit. |
+| BlockReach | `block-reach` | Detects block placement from farther <br />away than legitimate interaction range. |
+| Scaffold | `scaffold` | Detects repeated underfoot block placement <br />while moving, using placement angle, timing, <br />and movement patterns. |
+| ScaffoldSuspicion | `scaffold-suspicion` | Tracks weaker scaffold indicators <br />that are suspicious together but are <br />not strong enough for the main Scaffold <br />check alone. |
+| Tower | `tower` | Detects rapidly placing blocks underneath <br />oneself to rise vertically faster than normal. |
+| FastBreak | `fastbreak` | Detects blocks being broken faster than<br /> expected for the block, tool, effects, <br />and player state. |
+
+## Player Action Checks
+
+| Check | Config ID | Description |
+| --- | --- | --- |
+| FastConsume | `fastconsume` | Detects food, potions, and other consumable <br />items being completed faster than their<br /> normal use duration. |
+| InvalidPitch | `invalid-pitch` | Detects impossible vertical look angles outside <br />Minecrafts valid pitch range of -90 to 90 degrees. |
+
+## Packet Checks
+
+| Check | Config ID | Description |
+| --- | --- | --- |
+| PacketTimer | `packet-timer` | Counts movement packets per second and <br />detects clients sending them faster <br />than the expected tick rate. |
+| PacketMoveSim | `packet-move-sim` | Simulates packet-level movement limits and <br />detects excessive horizontal movement, <br />upward movement, hovering, or impossible <br />airborne changes. |
+| PacketGround | `packet-ground` | Compares the movement packet's on-ground <br />value with the server's collision state. |
+| PacketNoSwing | `packet-noswing` | Compares attack packets with recent <br />arm-animation packets to detect packet-level <br />NoSwing |
+| PacketUseEntity | `packet-use-entity` | Detects an excessive rate of entity-interaction <br />or attack packets. |
+| PacketRotation | `packet-rotation` | Detects invalid pitch and implausibly <br />large packet-level yaw or pitch changes. |
+
+Packet checks require ProtocolLib. If ProtocolLib is unavailable, the normal Bukkit-event checks continue working but these packet checks are disabled.
+
+## Behaviour Analasys
+
+| Check | Config ID | Description |
+| --- | --- | --- |
+| BehaviorAnomaly | `behavior-anomaly` | Combines multiple behavior samples to <br />identify a player whose overall movement <br />or combat profile differs significantly <br />from normal play. It is a supporting risk signal <br />rather than proof by itself. |
+
+## Client and Anti-Spoof Checks
+
+| Check | Detection ID | Description |
+| --- | --- | --- |
+| HackingMod | `hacking-mod` | Matches exposed client brands, mod names, channels, <br />and payload hints against configured hacked-client<br />patterns. |
+| BlockedChannel | `blocked-channel` | Detects a registered plugin channel matching a <br />configured suspicious or forbidden channel pattern. |
+| BrandSpoof | `brand-spoof` | Evaluates the client-reported brand against <br />configured known and suspicious brand patterns. |
+| ModDiscrepancy | `mod-discrepancy` | Detects inconsistent signals, such as a Fabric or Forge <br />brand without the channels normally exposed by <br />that loader. |
+| Client fingerprint | Informational | Records the brand, detected loader/client, protocol<br />version, client settings, channels, and custom <br />payloads for staff review. |
+
+# Important
+
+- Client brand, channel, and fingerprint information can be hidden or spoofed by modified clients.
+- A detected client or mod loader does not automatically prove cheating.
+- Client fingerprints should support movement, combat, packet, and behavior evidence rather than be used as the only ban reason.
+- Check thresholds, buffers, violation amounts, and kick levels are configured under `checks.<config-id>` in `plugins/SMP/Anticheat/config.yml`.

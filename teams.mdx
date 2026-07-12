@@ -1,0 +1,101 @@
+---
+title: "Teams"
+---
+
+```r
+/Teams
+  |- config.yml
+  |- messages.yml
+  |- teams.yml
+```
+
+## Configuration
+
+```yaml
+settings:
+  team-cost: 10000.0 # How much a team creation costs
+  default-team-limit: 100 
+	# means the server can have up to 100 teams total by default
+  max-team-slots: 5 
+  invite-expire-seconds: 60
+  name-regex: ^[A-Za-z0-9_]{3,16}$
+ 	# - ^ start of the string
+  	# - [A-Za-z0-9_] only letters, numbers, or underscore
+ 	#  - {3,16} length must be between 3 and 16 characters
+ 	#  - $ end of the string
+
+  blocked-team-names: # Banned team names
+  - fuck
+  - bitch
+  - shit
+  - sex
+  - dildo
+  - porn
+  - pussy
+  - cock
+  - penis
+  - ass
+  - cum
+  - hitler
+
+team-home:
+  teleport:
+    countdown-seconds: 3
+    cancel-on-move: true
+    message: '&7Teleporting in &#BC6EFF{seconds}s'
+    sounds:
+      countdown:
+        name: BLOCK_NOTE_BLOCK_PLING
+        volume: 1.0
+        pitch: 1.0
+        enabled: true
+      success:
+        name: ENTITY_ENDERMAN_TELEPORT
+        volume: 1.0
+        pitch: 1.0
+        enabled: true
+      cancelled:
+        name: ENTITY_VILLAGER_NO
+        volume: 1.0
+        pitch: 1.0
+        enabled: true
+    allow-bypass-permission: false
+	# means the bypass permission is ignored for team-home teleports (if false)
+```
+
+## Commands
+
+1. **/team create (name)** › Creates a new team
+2. **/team delete (team)** › Deletes a team
+3. **/team invite (player)** › Invites a player to your team
+4. **/team accept** › Accepts a team invite
+5. **/team deny** › Denies a team invite
+6. **/team leave** › Leaves your current team
+7. **/team chat (message)** › Sends a message to your team
+8. **/team kick (player)** › Kicks a player from your team
+9. **/team sethome** › Sets the team home at your location
+10. **/team home** › Teleports to the team home
+11. **/team admin delete (team)** › Admin deletes a team
+12. **/team admin kick (player)** › Admin kicks a player from a team
+13. **/team admin join (player) (team)** › Admin joins a player to a team
+14. **/team admin chatspy (team|all)** › Spies on the teams (you see all messages)
+15. **/team admin reload** › Reloads the Teams configuration
+
+## Permissions
+
+| Permission | Description | Default |
+| --- | --- | --- |
+| `smp.teams.use` | Allows using `/team` | true |
+| `smp.teams.create` | Creates teams | true |
+| `smp.teams.delete` | Deletes teams | true |
+| `smp.teams.invite` | Invites players to teams | true |
+| `smp.teams.leave` | Leaves a team | true |
+| `smp.teams.chat` | Uses team chat | true |
+| `smp.teams.kick` | Kicks members from a team | true |
+| `smp.teams.sethome` | Sets a team home | true |
+| `smp.teams.home` | Teleports to a team home | true |
+| `smp.teams.home.bypass` | Bypasses the team home countdown | op |
+| `smp.teams.admin` | Full admin access to teams | op |
+| `smp.teams.reload` | Reloads the Teams configuration | op |
+| `smp.teams.*` | Access all teams commands (wildcard) | true |
+| `smp.slot.teams.<number>` | Access to more team slots | false |

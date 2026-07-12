@@ -1,0 +1,51 @@
+---
+title: "Report"
+---
+
+```r
+/Report
+  |- config.yml
+  |- messages.yml
+  |- webhook.yml
+  |- gui.yml
+  |- reports.db
+```
+
+## Configuration
+
+```yaml
+report-cooldown: 60 # Report cooldown for players
+```
+
+## Webhooks
+
+```yaml
+webhook-url: '' # Paste your webhook url here
+
+ping-role-id: 'ROLE_ID_HERE' 
+# Paste your role id which role you want to ping when a report gets sent
+
+message: # webhook message content
+  title: '🚨 New Report'
+  footer: 'SMP Report System'
+  fields:
+    reported-player: 'Reported Player'
+    reporter: 'Reporter'
+    reason: 'Reason'
+    report-id: 'Report ID'
+```
+
+## Commands
+
+1. **/report (player) (reason)** › Submits a report for a player
+2. **/report list** › Opens the report management GUI
+3. **/report reload** › Reloads the report configuration
+
+## Placeholders
+
+| Permission | Description | Default |
+| --- | --- | --- |
+| `smp.report` | Submits reports with `/report` | true |
+| `smp.report.notify` | Receives staff report notifications | op |
+| `smp.report.list` | Opens the report management GUI with `/report list` | op |
+| `smp.report.reload` | Reloads the report configuration with `/report reload` | op |

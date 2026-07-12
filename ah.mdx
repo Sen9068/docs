@@ -1,0 +1,61 @@
+---
+title: "Auction "
+description: "Make players list or buy items from the Auction."
+---
+
+```r
+/Auction
+  |- GUIs/
+  	|- confirmation-guis.yml
+	|- expired-items.yml
+	|- gui.yml
+	|- purchase-history.yml
+  |- config.yml
+  |- messages.yml
+  |- auctions.db
+```
+
+---
+
+## Configuration
+
+```yaml
+auction:
+  tax-rate: 0.05 
+  listing-fee: 0
+  duration-hours: 24 # Duration until Auction expire
+  max-listings: 5 # Max listings for default player
+  blocked-items: # Add blocked items
+    - SPAWNER 
+  
+limits:
+  min-price: 1 # Minimum listing price
+  max-price: 1000000000 # Maximum listing price
+
+expiration-check-interval-ticks: 1200 # Checks expired items every minute
+
+sounds:
+  click: UI_BUTTON_CLICK
+  list-item: ENTITY_EXPERIENCE_ORB_PICKUP
+  purchase: ENTITY_PLAYER_LEVELUP
+  cancel: BLOCK_ANVIL_LAND
+  error: ENTITY_VILLAGER_NO
+```
+
+`tax-rate: 0.05` **›** When an item sells at auction, 5% of the sale price goes to the server/plugin as a tax. The remaining 95% goes to the seller.
+
+`listing-fee: 0` **›** Example: If set to 100 then every item listing will cost for the lister 100\$
+
+---
+
+## Permissions
+
+| Permission | Description | Default |
+| --- | --- | --- |
+| `smp.aukcia.use` | Use /ah command | true |
+| `smp.aukcia.admin` | Auction House admin access | op |
+| `smp.aukcia.reload` | Reload auction configuration | op |
+| `smp.aukcia.search` | Search auctions by player name | op |
+| `ah.slot.limit.<value>` | Adds extra slots for a player | false |
+
+`ah.slot.limit.<value>` works for example if I add a permission to a player `ah.slot.limit.5` then it adds 5 extra ah listing slots to the players limit.

@@ -1,0 +1,46 @@
+---
+title: "Chat"
+---
+
+```r
+/Chat
+  |- ChatHover/
+  	|- config.yml
+  |- config.yml
+  |- messages.yml
+```
+
+## Configuration
+
+```yaml
+chat-format: '<gray><prefix><name>: <white><message>' # default chat format
+group-formats: # chat formats for specific luckperms ranks
+  admin: '%smp_player_tag% <gray><prefix><name>: <white><message>'
+  owner: '%smp_player_tag% <gray><prefix><name>: <white><message>'
+```
+
+## Chat Hover
+
+```yaml
+enabled: true
+hover-text:
+  - '%luckperms_prefix%{player}'
+  - ''
+  - '<b><gradient:#37FF00:#37FF00><shadow:#0E4000:1>$</shadow></gradient></b> &fᴍᴏɴᴇʏ &#37FF00{money}'
+  - '<gradient:#FF2F2F:#FF2F2F><shadow:#400C0C:1>🗡</shadow></gradient> &fᴋɪʟʟꜱ &#FF2F2F{kills}'
+  - '<gradient:#BFFC5C:#BFFC5C><shadow:#3E1E16:1>☠</shadow></gradient> &fᴅᴇᴀᴛʜꜱ &#BFFC5C{deaths}'
+  - '<gradient:#F67757:#F67757><shadow:#3E1E16:1>⌚</shadow></gradient> &fᴘʟᴀʏᴛɪᴍᴇ &#F67757{playtime}  '
+  - '<gradient:#FDBB2B:#FDBB2B><shadow:#3F2F0B:1>★</shadow></gradient> &fᴛᴏᴋᴇɴꜱ &#FDBB2B★{tokens}'
+  - ''
+  - '&8› &fSend a Message'
+```
+
+## Commands
+
+1. **/chat reload** › Reloads chat configuration
+
+## Permissions
+
+| Permission | Description | Default |
+| --- | --- | --- |
+| `smp.chat.admin` | Allows the use of /chat reload | op |
