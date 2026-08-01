@@ -1,0 +1,53 @@
+---
+title: "Announcements"
+---
+
+```r
+/Announcements
+  |- config.yml
+  |- messages.yml
+```
+
+## Configuration
+
+```yaml
+settings:
+  enabled: true # Should announcements be enabled
+  mode: sequential 
+# sequential: shows announcements in order
+# random: shows random announcements not in order
+
+  interval-seconds: 180 # announcement cooldown period
+  required-player-count: 1 # required players to show announcement
+  prefix: "" # prefix before the announcement (leave empty if nothing)
+
+default-sound:
+  enabled: false 
+  name: entity.experience_orb.pickup
+  volume: 1.0
+  pitch: 1.0
+
+announcements:
+  example: # announcement #1, you can add more announcements if you want.
+    enabled: true
+    messages:
+      - "&7Welcome to the server!" # you can use <center>text</center>
+      - "&7Use /help to get started."
+    sound: # sound when announcement shows
+      enabled: false
+      name: entity.experience_orb.pickup
+      volume: 1.0
+      pitch: 1.0
+```
+
+## Commands
+
+1. **/announcement broadcast (broadcastname)** › Force broadcasts a specific announcement
+2. **/announcement list** › Lists all current announcements
+3. **/announcements reload** › Reloads the announcement module
+
+## Permissions
+
+| Permission | Description | Default |
+| --- | --- | --- |
+| `smp.announcements.admin` | Allows the use of announcement<br />commands | op |
