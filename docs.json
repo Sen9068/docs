@@ -1,13 +1,16 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mint Starter Kit",
+  "name": "SMP Core",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#4f15a3",
+    "light": "#7300ff",
+    "dark": "#2e0083"
   },
-  "favicon": "/favicon.svg",
+  "favicon": {
+    "light": "/images/dark.svg",
+    "dark": "/images/dark.svg"
+  },
   "navigation": {
     "tabs": [
       {
@@ -66,42 +69,15 @@
           "permissions",
           "placeholders"
         ]
-      },
-      {
-        "tab": "Anticheat",
-        "pages": [
-          "ac",
-          {
-            "group": "Checks",
-            "pages": [
-              "check-types",
-              "check-configuration"
-            ]
-          },
-          {
-            "group": "Behaviour",
-            "pages": [
-              "introduction",
-              "csv",
-              "labels",
-              "anomaly-score"
-            ]
-          }
-        ]
       }
     ]
   },
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "/images/light.svg",
+    "dark": "/images/dark.svg"
   },
   "navbar": {
-    "links": [
-      {
-        "label": "Support",
-        "href": "mailto:hi@mintlify.com"
-      }
-    ],
+    "links": [],
     "primary": {
       "type": "button",
       "label": "Dashboard",
@@ -120,11 +96,19 @@
      "vscode"
    ]
   },
-  "footer": {
-    "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+  "background": {
+    "color": {
+      "light": "#0b0014",
+      "dark": "#090017"
     }
+  },
+  "icons": {
+    "library": "lucide"
+  },
+  "appearance": {
+    "strict": true
+  },
+  "fonts": {
+    "family": "Poppins"
   }
 }
